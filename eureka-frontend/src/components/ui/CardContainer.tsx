@@ -1,4 +1,4 @@
-import SpotlightCard from "@/components/SpotlightCard";
+import SpotlightCard from "@/components/shadcn/SpotlightCard";
 import { TbCopyOff } from "react-icons/tb";
 import { IoExtensionPuzzleSharp } from "react-icons/io5";
 import { GrOptimize } from "react-icons/gr";

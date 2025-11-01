@@ -4,10 +4,10 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
-import { Navbar1 } from "./components/shadcn-blocks/Navbar1.tsx";
+import { Navbar1 } from "./components/shadcn/Navbar1.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
-import Footer from "./components/Footer.tsx";
+import Footer from "./components/ui/Footer.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

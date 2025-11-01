@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/shadcn/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -16,14 +16,14 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/shadcn/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/components/shadcn/sheet";
 
 interface MenuItem {
   title: string;
@@ -61,37 +61,37 @@ const Navbar1 = ({
     title: "Eureaka!",
   },
   menu = [
-    // { title: "Home", url: "#" },
-    {
-      title: "About Me",
-      url: "#",
-      items: [
-        {
-          title: "Matrix",
-          description: "Know more about me..",
-          icon: <FaUserCircle />,
-          url: "https://portfolio-alpha-henna-i2cw38lgm0.vercel.app/",
-        },
-        {
-          title: "LinkedIN",
-          description: "Let's connect",
-          icon: <FaLinkedin />,
-          url: "https://www.linkedin.com/in/mahammed-sharief-shaik/",
-        },
-        {
-          title: "Github",
-          description: "Check out my profile",
-          icon: <VscGithub />,
-          url: "https://github.com/Mahammed-Sharief-Shaik",
-        },
-        {
-          title: "Repo",
-          description: "Repo for this project",
-          icon: <MdLink />,
-          url: "#",
-        },
-      ],
-    },
+    { title: "Home", url: "/" },
+    // {
+    //   title: "About Me",
+    //   url: "#",
+    //   items: [
+    //     {
+    //       title: "Matrix",
+    //       description: "Know more about me..",
+    //       icon: <FaUserCircle />,
+    //       url: "https://portfolio-alpha-henna-i2cw38lgm0.vercel.app/",
+    //     },
+    //     {
+    //       title: "LinkedIN",
+    //       description: "Let's connect",
+    //       icon: <FaLinkedin />,
+    //       url: "https://www.linkedin.com/in/mahammed-sharief-shaik/",
+    //     },
+    //     {
+    //       title: "Github",
+    //       description: "Check out my profile",
+    //       icon: <VscGithub />,
+    //       url: "https://github.com/Mahammed-Sharief-Shaik",
+    //     },
+    //     {
+    //       title: "Repo",
+    //       description: "Repo for this project",
+    //       icon: <MdLink />,
+    //       url: "#",
+    //     },
+    //   ],
+    // },
     // {
     //   title: "Resources",
     //   url: "#",
@@ -123,13 +123,13 @@ const Navbar1 = ({
     //   ],
     // },
     {
-      title: "What's Eureka ?",
+      title: "About us",
       url: "/about",
     },
-    // {
-    //   title: "Blog",
-    //   url: "#",
-    // },
+    {
+      title: "How it Works ?",
+      url: "#",
+    },
   ],
   auth = {
     login: { title: "Sign in", url: "/login" },

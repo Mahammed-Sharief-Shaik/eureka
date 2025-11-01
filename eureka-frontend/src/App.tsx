@@ -1,4 +1,4 @@
-import { Navbar1 } from "./components/shadcn-blocks/Navbar1"
+import { Navbar1 } from "./components/shadcn/Navbar1"
 
 const App = () => {
   return (

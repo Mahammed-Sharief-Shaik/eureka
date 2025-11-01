@@ -1,13 +1,13 @@
-import { Hero3 } from "@/components/hero3";
-import CardContainer from "./CardContainer";
-import About from "./About";
+import { Hero3 } from "@/components/shadcn/hero3";
+import CardContainer from "../components/ui/CardContainer";
+import HowItWorks from "@/components/ui/HowItWorks";
 
 const Home = () => {
   return <div className="">
 
     <Hero3/>
     <CardContainer/>
-    <About/>
+    <HowItWorks/>
   </div>;
 };
 

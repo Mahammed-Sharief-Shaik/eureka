@@ -194,7 +194,6 @@ Error: #F87171 (red-400)
 .white-btn {
   @apply bg-white shadow-lg shadow-white/50 text-black;
   font-family: "Sour Gummy", sans-serif;
-
 }
 
 @keyframes scroll-left {
@@ -253,4 +252,8 @@ Error: #F87171 (red-400)
 
 .card6 {
   animation-delay: calc(100s / 6 * (6 - 6) * -1);
+}
+
+.content-card{
+  @apply text-text-primary py-5 px-3 border-1 border-accent text-xl  tracking-wider ;
 }
