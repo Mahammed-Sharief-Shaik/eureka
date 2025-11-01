@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* @import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&display=swap'); */
+/* @custom-variant dark (&:is(.dark *)); */
+
+
+
+/* @theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  } */
+/* } */
+
+.font1-epundu {
+  font-family: "Epunda Slab", serif;
+}
+
+.font2-sour-gummy {
+  font-family: "Sour Gummy", sans-serif;
+}
+
+.font-logo {
+  font-family: "Nova Square", sans-serif;
+}
+
+.font2-heading {
+  @apply text-text-primary text-pretty text-4xl font-bold lg:text-6xl xl:text-7xl font-[Sour_Gummy];
+}
+
+/* @theme {
+  --color-eureka-yellow: #FFD700;
+  --color-dark-navy-blue: #1E1E2E;
+  --color-highlight-teal: #00C896;
+  --color-muted: #A1A1AA;
+} */
+
+@theme {
+  /* Backgrounds */
+  --color-bg-primary: #0F172A;
+  /* slate-900, deep but not pure black */
+  --color-bg-secondary: #1E293B;
+  /* slate-800 for separation */
+
+  /* Primary Accent */
+  --color-primary: #A78BFA;
+  /* soft lavender, readable on dark bg */
+  --color-primary-hover: #C4B5FD;
+  /* lighter lavender */
+
+  /* Secondary Accents */
+  --color-accent: #FBBF24;
+  /* amber-400 → glowing lightbulb */
+  --color-success: #34D399;
+  /* emerald-400 */
+  --color-error: #F87171;
+  /* red-400 */
+
+  /* Text Colors */
+  --color-text-primary: #F8FAFC;
+  /* neutral white-gray */
+  --color-text-secondary: #CBD5E1;
+  /* slate-300 for softer text */
+}
+
+/* 
+Background (pages): #0F172A (slate-900, deep but not pure black)
+Navbar / Cards: #1E293B (slate-800 for separation)
+Primary (Buttons, Links): #A78BFA (soft lavender, readable on dark bg)
+Primary Hover: #C4B5FD (lighter lavender)
+Accent (Highlights, Icons, Tags): #FBBF24 (amber-400 → glowing lightbulb)
+Font (Primary Text): #F8FAFC (neutral white-gray)
+Font (Secondary Text): #CBD5E1 (slate-300 for softer text)
+Success: #34D399 (emerald-400)
+Error: #F87171 (red-400)
+*/
+
+.lavendar-btn {
+  @apply shadow-lg shadow-primary/50 bg-primary;
+  font-family: "Sour Gummy", sans-serif;
+}
+
+.white-btn {
+  @apply bg-white shadow-lg shadow-white/50 text-black;
+  font-family: "Sour Gummy", sans-serif;
+
+}
+
+@keyframes scroll-left {
+  to {
+    left: -280px;
+  }
+}
+
+.card-container {
+  mask-image: linear-gradient(to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1) 20%,
+      rgba(0, 0, 0, 1) 80%,
+      rgba(0, 0, 0, 0));
+}
+
+.card {
+  @apply w-70 h-90 absolute bg-accent rounded-2xl p-5 flex justify-center gap-1 items-center flex-col;
+
+  left: max(calc(280px * 6), 100%);
+  animation-name: scroll-left;
+  animation-duration: 100s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+}
+
+.card>h1 {
+  @apply h-1/4 font-bold ;
+}
+
+.card>p {
+  @apply h-1/3 ;
+}
+
+
+.card1 {
+  animation-delay: calc(100s / 6 * (6 - 1) * -1);
+}
+
+.card2 {
+  animation-delay: calc(100s / 6 * (6 - 2) * -1);
+}
+
+.card3 {
+  animation-delay: calc(100s / 6 * (6 - 3) * -1);
+}
+
+.card4 {
+  animation-delay: calc(100s / 6 * (6 - 4) * -1);
+}
+
+.card5 {
+  animation-delay: calc(100s / 6 * (6 - 5) * -1);
+}
+
+.card6 {
+  animation-delay: calc(100s / 6 * (6 - 6) * -1);
+}
