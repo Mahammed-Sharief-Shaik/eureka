@@ -1,7 +1,4 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-import { FaLinkedin, FaUserCircle } from "react-icons/fa";
-import { VscGithub } from "react-icons/vsc";
-import { MdLink } from "react-icons/md";
+import { Menu } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -128,7 +125,7 @@ const Navbar1 = ({
     },
     {
       title: "How it Works ?",
-      url: "#",
+      url: "/#how-it-works",
     },
   ],
   auth = {

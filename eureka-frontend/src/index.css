@@ -4,6 +4,20 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&display=swap'); */
 /* @custom-variant dark (&:is(.dark *)); */
 
+/* Hide scrollbar for Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Optional: For consistent behavior */
+body {
+  overflow-y: scroll; /* keep layout stable even without visible scrollbar */
+}
 
 
 /* @theme inline {
@@ -187,12 +201,12 @@ Error: #F87171 (red-400)
 */
 
 .lavendar-btn {
-  @apply shadow-lg shadow-primary/50 bg-primary;
+  @apply shadow-lg shadow-primary/50 bg-primary tracking-wider;
   font-family: "Sour Gummy", sans-serif;
 }
 
 .white-btn {
-  @apply bg-white shadow-lg shadow-white/50 text-black;
+  @apply bg-white shadow-lg shadow-white/50 text-black tracking-wider;
   font-family: "Sour Gummy", sans-serif;
 }
 
@@ -254,6 +268,3 @@ Error: #F87171 (red-400)
   animation-delay: calc(100s / 6 * (6 - 6) * -1);
 }
 
-.content-card{
-  @apply text-text-primary py-5 px-3 border-1 border-accent text-xl  tracking-wider ;
-}

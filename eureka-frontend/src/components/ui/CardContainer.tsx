@@ -14,7 +14,7 @@ const CardContainer = () => {
       </h1>
       <div
         className="text-bg-primary mx-10
-      relative h-90 overflow-hidden card-container"
+      relative h-95 overflow-hidden card-container"
       >
         {/* 1 */}
         <SpotlightCard

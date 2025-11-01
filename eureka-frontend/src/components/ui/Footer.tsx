@@ -1,8 +1,7 @@
-import React from 'react'
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="bg-bg-secondary text-text-primary text-center">
         Made with 🤍 by Matrix
     </footer>
   )
