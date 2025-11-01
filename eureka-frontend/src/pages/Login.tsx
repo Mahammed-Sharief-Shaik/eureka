@@ -1,7 +1,8 @@
+import { LoginForm } from "@/components/shadcn/login-form"
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <LoginForm className="bg-bg-primary text-white"/>
   )
 }
 

@@ -3,11 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.tsx";
-import Register from "./pages/Register.tsx";
 import { Navbar1 } from "./components/shadcn/Navbar1.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Footer from "./components/ui/Footer.tsx";
+import Signup from "./pages/Signup.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Signup />} />
         <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
