@@ -6,7 +6,8 @@ router.get('/',
     (req , res) =>{
         res.send("/api/auth is working")
     }
-)
+);
 
+// router.post()
 
 export default router;

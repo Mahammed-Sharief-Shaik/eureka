@@ -8,6 +8,7 @@ import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Footer from "./components/ui/Footer.tsx";
 import Signup from "./pages/Signup.tsx";
+import Chat from "./pages/Chat.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/about" element={<About />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
       <Footer />
     </BrowserRouter>

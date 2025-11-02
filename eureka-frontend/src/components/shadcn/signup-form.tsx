@@ -16,18 +16,18 @@ export function SignupForm({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
-      <Card className="overflow-hidden p-0 w-3/4 mx-auto">
+    <div className={cn("flex flex-col gap-6 py-5", className)} {...props}>
+      <Card className="overflow-hidden p-0 w-9/10 md:w-3/4 mx-auto ring-1 ring-white shadow-lg shadow-accent">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Create your account</h1>
-                <p className="text-muted-foreground text-sm text-balance">
+                <h1 className="text-2xl font-bold font2-sour-gummy">Create your account</h1>
+                <p className="text-muted-foreground text-sm text-balance font2-sour-gummy">
                   Enter your email below to create your account
                 </p>
               </div>
-              <Field>
+              <Field className="font1-epundu tracking-wider">
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
@@ -40,7 +40,7 @@ export function SignupForm({
                   email with anyone else.
                 </FieldDescription> */}
               </Field>
-              <Field>
+              <Field className="font1-epundu tracking-wider">
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -58,10 +58,10 @@ export function SignupForm({
                 </FieldDescription>
               </Field>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button className="white-btn cursor-pointer" type="submit">Create Account</Button>
               </Field>
               
-              <FieldDescription className="text-center">
+              <FieldDescription className="text-center font1-epundu tracking-wider">
                 Already have an account? <a href="/login">Sign in</a>
               </FieldDescription>
             </FieldGroup>
@@ -78,7 +78,7 @@ export function SignupForm({
           */}
         </CardContent>
       </Card>
-      <FieldDescription className="px-6 text-center">
+      <FieldDescription className="px-6 text-center font1-epundu tracking-wider">
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </FieldDescription>

@@ -2,17 +2,6 @@ import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { GrMail } from "react-icons/gr";
 
 function About() {
-  // return (
-  //   <section className="bg-bg-primary  py-5 ">
-  //     <h1 className="font2-heading text-center">
-
-  //     About us
-  //     </h1>
-  //     <section>
-
-  //     </section>
-  //   </section>
-  // )
   return (
     <section
       id="about"
@@ -23,10 +12,10 @@ function About() {
         <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-[var(--color-accent)]">
           About Eureka
         </h2>
-        <p className="text-[var(--color-text-secondary)] text-lg mb-12 leading-relaxed">
+        <p className="text-text-secondary text-lg mb-12 leading-relaxed">
           Eureka is a passion project by{" "}
           <span className="text-[var(--color-primary)] font-semibold">
-            Mahammed Sharief Shaik
+            Matrix
           </span>
           , a developer who believes coding should sharpen your thinking—not
           your copy-paste skills. Inspired by learners who struggle with DSA
