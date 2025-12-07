@@ -31,7 +31,7 @@ const Hero3 = ({
   buttons = {
     primary: {
       text: "Sign Up",
-      url: "/register",
+      url: "/signup",
     },
     secondary: {
       text: "Know More",

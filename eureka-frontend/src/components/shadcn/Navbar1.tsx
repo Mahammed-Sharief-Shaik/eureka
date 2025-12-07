@@ -130,7 +130,7 @@ const Navbar1 = ({
   ],
   auth = {
     login: { title: "Sign in", url: "/login" },
-    signup: { title: "Sign up", url: "/register" },
+    signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
   return (
