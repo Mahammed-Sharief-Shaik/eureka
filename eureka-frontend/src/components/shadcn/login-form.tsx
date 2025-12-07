@@ -50,7 +50,7 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
-                  placeholder="eureka@gmail.com"
+                  placeholder="eureka@matrix.com"
                   value={email}
                   required
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {

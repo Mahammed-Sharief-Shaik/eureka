@@ -1,0 +1,22 @@
+users
+Column	Type	Notes
+user_id	UUID PK	
+name	VARCHAR	
+email	VARCHAR UNIQUE	
+password	TEXT	hashed
+created_at	TIMESTAMP DEFAULT now()	
+
+chats
+Column	Type	Notes
+chat_id	UUID PK	
+title	TEXT	
+user_id	UUID FK → users.user_id	
+created_at	TIMESTAMP DEFAULT now()	
+
+question_answers
+Column	Type	Notes
+qid	UUID PK	
+question	TEXT	
+answer	TEXT	
+chat_id	UUID FK → chats.chat_id	
+created_at	TIMESTAMP DEFAULT now()

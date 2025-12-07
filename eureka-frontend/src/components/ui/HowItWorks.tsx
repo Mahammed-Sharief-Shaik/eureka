@@ -40,7 +40,7 @@ const HowItWorks = () => {
           className="rounded-lg"
           loop={true}
           controls={false}
-          //   autoPlay={true}
+            autoPlay={true}
           muted={true}
         ></video>
       </div>

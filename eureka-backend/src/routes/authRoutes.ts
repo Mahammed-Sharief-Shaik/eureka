@@ -1,4 +1,5 @@
 import express from 'express'
+import { loginUser, signupUser } from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -9,20 +10,10 @@ router.get('/',
 );
 
 router.post("/login",
-    (req, res) => {
-        const { email, password } = req.body;
+    loginUser
+);
 
-        if(email==='learntech466@gmail.com'){
-
-            res.json({
-                token: "Hello"
-            });
-        }else{
-            res.send(404).json({
-                message : "Not Learntech"
-            })
-        }
-    }
-)
-
+router.post('/signup',
+    signupUser
+);
 export default router;
