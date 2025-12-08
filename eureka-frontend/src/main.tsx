@@ -9,6 +9,7 @@ import About from "./pages/About.tsx";
 import Footer from "./components/ui/Footer.tsx";
 import Signup from "./pages/Signup.tsx";
 import Chat from "./pages/Chat.tsx";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/chat" element={<Chat />} />
       </Routes>
       <Footer />
+       <Toaster richColors position="top-right" /> 
     </BrowserRouter>
   </StrictMode>
 );

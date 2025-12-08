@@ -87,7 +87,7 @@ export function LoginForm({
               </Field>
 
               <FieldDescription className="text-center font1-epundu tracking-wider">
-                Don&apos;t have an account? <a href="#">Sign up</a>
+                Don&apos;t have an account? <a href="/signup">Sign up</a>
               </FieldDescription>
             </FieldGroup>
           </form>

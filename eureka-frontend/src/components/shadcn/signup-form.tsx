@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/shadcn/card";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import {
   Field,
   FieldDescription,
@@ -10,32 +11,71 @@ import {
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import SignupImage from "/signup-page-side.webp";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useSignup } from "@/hooks/useSignup";
+import ErrorDisplay from "../custom/ErrorDisplay";
+import Loader from "../custom/Loader";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+
+const isValid = (password: string): boolean => {
+  const strongPasswordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/;
+  return strongPasswordPattern.test(password);
+};
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { signup, loading, error } = useSignup();
-  // const [name , setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { signup, loading, setLoading, error, setError } = useSignup();
+
+  // ⬇️ REPLACED useState with useRef
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+
+    const email = emailRef.current?.value ?? "";
+    const password = passwordRef.current?.value ?? "";
+    const confirmPassword = confirmPasswordRef.current?.value ?? "";
+
     const name = email.split("@")[0].trim().toLowerCase();
-    try {
-      const res = await signup({name, email, password });
-      console.log("Signed in:", res);
-    } catch {
-      // error handled in hook
+
+    if (confirmPassword !== password) {
+      setError("Passwords do not match.");
+    } else if (password.length <= 8) {
+      setLoading(false);
+      setError("Password must be atleast 8 characters long.");
+    } else if (!isValid(password)) {
+      setError(
+        "Password must be a mix of uppercase, lowercase, numbers, and symbols."
+      );
+    } else {
+      try {
+        const res = await signup({ name, email, password });
+        console.log("Signed in:", res);
+        toast.success("Account created successfully. Proceed to login.", {
+          className: "font1-epundu tracking-wider",
+        });
+        navigate("/login");
+      } catch {
+        // error handled in hook
+      }
     }
+    setLoading(false);
   };
 
   return (
     <div className={cn("flex flex-col gap-6 py-5", className)} {...props}>
+      {loading && <Loader />}
       <Card className="overflow-hidden p-0 w-9/10 md:w-3/4 mx-auto ring-1 ring-white shadow-lg shadow-accent">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" onSubmit={handleSignup}>
@@ -55,10 +95,8 @@ export function SignupForm({
                   type="email"
                   placeholder="eureka@matrix.com"
                   required
-                  value={email}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setEmail(e.target.value);
-                  }}
+                  ref={emailRef}
+                  autoComplete="email"
                 />
               </Field>
               <Field className="font1-epundu tracking-wider">
@@ -67,12 +105,10 @@ export function SignupForm({
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <Input
                       id="password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       required
-                      value={password}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                        setPassword(e.target.value);
-                      }}
+                      ref={passwordRef}
+                      autoComplete="new-password"
                     />
                   </Field>
                   <Field>
@@ -81,22 +117,41 @@ export function SignupForm({
                     </FieldLabel>
                     <Input
                       id="confirm-password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       required
-                      value={confirmPassword}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                        setConfirmPassword(e.target.value);
-                      }}
+                      ref={confirmPasswordRef}
+                      autoComplete="new-password"
                     />
                   </Field>
                 </Field>
-                <FieldDescription>
-                  Must be at least 8 characters long.
+                <FieldDescription
+                  className="flex  items-center gap-1 text-sm text-text-secondary "
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                >
+                  {showPassword ? (
+                    <FiEyeOff className="cursor-pointer" />
+                  ) : (
+                    <FiEye className="cursor-pointer" />
+                  )}{" "}
+                  <span className="cursor-pointer">
+                    {showPassword ? "hide" : "show"} password
+                  </span>
                 </FieldDescription>
+                {/* <FieldDescription>
+                  Must be at least 8 characters long.
+                </FieldDescription> */}
               </Field>
+              {error && <ErrorDisplay message={error} />}
               <Field>
-                <Button className="white-btn cursor-pointer" type="submit">
-                  Create Account
+                <Button
+                  className={` white-btn  ${
+                    loading ? "grayscale cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                  type="submit"
+                >
+                  {loading ? "Creating Account.." : "Create Account"}
                 </Button>
               </Field>
 
@@ -109,7 +164,9 @@ export function SignupForm({
             <img
               src={SignupImage}
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover saturate-150 "
+              className={`absolute inset-0 h-full w-full object-cover saturate-150 ${
+                loading && "grayscale"
+              } `}
             />
           </div>
           {/* 

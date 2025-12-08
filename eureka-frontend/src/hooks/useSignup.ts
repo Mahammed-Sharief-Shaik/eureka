@@ -4,11 +4,11 @@ import { useState } from "react";
 
 export const useSignup = () => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>("");
 
     const signup = async (data: SignupFormData) => {
         setLoading(true);
-        setError(null);
+        setError("");
 
         try {
             const response = await axios.post<SignupResponse>(
@@ -25,5 +25,5 @@ export const useSignup = () => {
         }
     }
 
-    return { signup, loading, error };
+    return { signup, loading, error, setError, setLoading };
 }
