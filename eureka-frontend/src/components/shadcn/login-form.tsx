@@ -14,7 +14,7 @@ import { useLogin } from "@/hooks/useLogin";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import Loader from "../custom/Loader";
+import Loader from "../ui/Loader";
 
 export function LoginForm({
   className,

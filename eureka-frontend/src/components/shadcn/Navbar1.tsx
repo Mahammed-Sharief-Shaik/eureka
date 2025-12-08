@@ -21,6 +21,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/shadcn/sheet";
+import useStoreData from "@/store/store";
 
 interface MenuItem {
   title: string;
@@ -133,8 +134,10 @@ const Navbar1 = ({
     signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
+  const loggedIn = useStoreData((state) => state.isLoggedIn);
   return (
-    <section className="py-3 px-5  text-white bg-bg-secondary  ">
+    <section className={`py-2 px-5  text-white bg-bg-secondary
+      border-b-[0.5px] border-gray-600 ${loggedIn && 'hidden'}`}>
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
@@ -147,33 +150,37 @@ const Navbar1 = ({
               </span>
             </a>
             <div className="flex items-center">
-              <NavigationMenu className="">
-                <NavigationMenuList className="">
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
+              {!loggedIn && (
+                <NavigationMenu className="">
+                  <NavigationMenuList className="">
+                    {menu.map((item) => renderMenuItem(item))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+              )}
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm" className="white-btn">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
-            <Button asChild size="sm" className="lavendar-btn">
-              <a href={auth.signup.url}>{auth.signup.title}</a>
-            </Button>
-          </div>
+          {!loggedIn && (
+            <div className="flex gap-2">
+              <Button asChild variant="outline" size="sm" className="white-btn">
+                <a href={auth.login.url}>{auth.login.title}</a>
+              </Button>
+              <Button asChild size="sm" className="lavendar-btn">
+                <a href={auth.signup.url}>{auth.signup.title}</a>
+              </Button>
+            </div>
+          )}
         </nav>
 
         {/* Mobile Menu */}
-        <div className="block lg:hidden ">
+        <div className={`block lg:hidden `}>
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8 " alt={logo.alt} />
             </a>
             <Sheet>
-              <SheetTrigger asChild>
-                <Button  size="icon">
+              <SheetTrigger asChild className={`${loggedIn && "hidden"}`}>
+                <Button size="icon">
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>
@@ -185,7 +192,7 @@ const Navbar1 = ({
                     </a>
                   </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-6 p-4 ">
+                <div className={`flex flex-col gap-6 p-4  `}>
                   <Accordion
                     type="single"
                     collapsible
@@ -194,8 +201,8 @@ const Navbar1 = ({
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
 
-                  <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline" className="white-btn" >
+                  <div className={`flex flex-col gap-3 `}>
+                    <Button asChild variant="outline" className="white-btn">
                       <a href={auth.login.url}>{auth.login.title}</a>
                     </Button>
                     <Button asChild className="lavendar-btn">

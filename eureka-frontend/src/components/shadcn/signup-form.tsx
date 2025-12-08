@@ -19,8 +19,7 @@ import {
   type FormEvent,
 } from "react";
 import { useSignup } from "@/hooks/useSignup";
-import ErrorDisplay from "../custom/ErrorDisplay";
-import Loader from "../custom/Loader";
+import Loader from "../ui/Loader";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
