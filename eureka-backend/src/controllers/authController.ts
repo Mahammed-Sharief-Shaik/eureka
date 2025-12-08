@@ -2,10 +2,34 @@ import { Request, Response } from "express";
 import { LoginRequestBody, SignupRequestBody } from "../types/index.js";
 import prisma from "../prisma.js";
 import bcrypt from "bcryptjs";
-
-const loginUser = (req: Request<{}, {}, LoginRequestBody>, res: Response) => {
+import jwt from "jsonwebtoken";
+import "dotenv/config"
+const loginUser = async (req: Request<{}, {}, LoginRequestBody>, res: Response) => {
     const { email, password } = req.body;
+    console.log("Login request : ");
+    console.table(req.body);
+    try {
+        const user = await prisma.user.findUnique({
+            where: { email }
+        });
+        if (!user) return res.status(401).json({ message: "User not found." });
 
+        const hashedPassword = user.password;
+        const matches = await bcrypt.compare(password, hashedPassword);
+        if (!matches) return res.status(401).json({ message: "Invalid Password." });
+
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: "1h" });
+        console.log("Token : ", token);
+        return res.status(200).json({
+            message: "User logged in successfully",
+            token,
+            user: { id: user.id, email, name: user.name }
+        });
+
+    } catch (error) {
+        console.error("Error in Signup method", error);
+        res.status(500).json({ message: "Internal Server Error. Try again later." })
+    }
 
 }
 
@@ -24,7 +48,6 @@ const signupUser = async (req: Request<{}, {}, SignupRequestBody>, res: Response
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // await timeWaste();
         const user = await prisma.user.create(
             {
                 data: {

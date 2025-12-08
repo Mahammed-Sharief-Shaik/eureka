@@ -173,7 +173,7 @@ const Navbar1 = ({
             </a>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button  size="icon">
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>

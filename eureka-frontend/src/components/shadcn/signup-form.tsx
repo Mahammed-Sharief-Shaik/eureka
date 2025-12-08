@@ -11,7 +11,13 @@ import {
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import SignupImage from "/signup-page-side.webp";
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { useSignup } from "@/hooks/useSignup";
 import ErrorDisplay from "../custom/ErrorDisplay";
 import Loader from "../custom/Loader";
@@ -37,7 +43,18 @@ export function SignupForm({
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  useEffect(() => {
+    console.log("use effect ",error);
+    if (error) {
+      toast.error(error, {
+        className: "font1-epundu tracking-wider",
+      });
 
+      setTimeout(() => {
+        setError("");
+      },1000);
+    }
+  }, [error]);
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (loading) return;
@@ -55,6 +72,7 @@ export function SignupForm({
       setLoading(false);
       setError("Password must be atleast 8 characters long.");
     } else if (!isValid(password)) {
+      setLoading(false);
       setError(
         "Password must be a mix of uppercase, lowercase, numbers, and symbols."
       );
@@ -142,8 +160,8 @@ export function SignupForm({
                 {/* <FieldDescription>
                   Must be at least 8 characters long.
                 </FieldDescription> */}
+                {/* {error && <ErrorDisplay message={error} />} */}
               </Field>
-              {error && <ErrorDisplay message={error} />}
               <Field>
                 <Button
                   className={` white-btn  ${

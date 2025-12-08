@@ -9,22 +9,37 @@ import {
   FieldLabel,
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useLogin } from "@/hooks/useLogin";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import Loader from "../custom/Loader";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const { login, loading, error } = useLogin();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const { login, loading, setLoading, error, setError } = useLogin();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    const email = emailRef.current?.value ?? "";
+    const password = passwordRef.current?.value ?? "";
     try {
       const res = await login({ email, password });
+      toast.success("Login Successful", {
+        className: "font1-epundu tracking-wider",
+      });
       console.log("Logged in:", res);
+      navigate('/chat');
     } catch {
       // error handled in hook
     }
@@ -32,6 +47,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
+      {loading && <Loader />}
       <Card className="overflow-hidden p-0 w-9/10 md:w-3/4 mx-auto ring-1 ring-white shadow-lg shadow-accent">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" onSubmit={handleLogin}>
@@ -51,12 +67,9 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="eureka@matrix.com"
-                  value={email}
                   required
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setEmail(e.target.value);
-                    console.log("Email : ", email);
-                  }}
+                  ref={emailRef}
+                  autoComplete="email"
                 />
               </Field>
               <Field className="font1-epundu tracking-wider">
@@ -71,14 +84,28 @@ export function LoginForm({
                 </div>
                 <Input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
-                  value={password}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setPassword(e.target.value);
-                    console.log("Password : ", password);
-                  }}
+                  ref={passwordRef}
+                  autoComplete="current-password"
                 />
+
+                <FieldDescription
+                  className="flex  items-center gap-1 text-sm text-text-secondary "
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                >
+                  {showPassword ? (
+                    <FiEyeOff className="cursor-pointer" />
+                  ) : (
+                    <FiEye className="cursor-pointer" />
+                  )}{" "}
+                  <span className="cursor-pointer">
+                    {showPassword ? "hide" : "show"} password
+                  </span>
+                </FieldDescription>
+                {/* {error && <ErrorDisplay message={error} />} */}
               </Field>
               <Field>
                 <Button className="lavendar-btn cursor-pointer" type="submit">
@@ -95,7 +122,12 @@ export function LoginForm({
             <img
               src={LoginImage}
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover saturate-150  "
+              className={`absolute inset-0 h-full w-full object-cover filter ${
+                loading ? 'grayscale' : 
+                error
+                  ? "hue-rotate-180 brightness-90 saturate-300  "
+                  : "saturate-150"
+              } `}
             />
             {/* 
               Filter wrong details : filter hue-rotate-180 brightness-90 saturate-300

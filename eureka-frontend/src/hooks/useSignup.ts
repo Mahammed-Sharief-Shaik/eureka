@@ -1,6 +1,7 @@
 import type { SignupFormData, SignupResponse } from "@/types";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const useSignup = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -18,7 +19,10 @@ export const useSignup = () => {
             // localStorage.setItem("token", response.data.token);
             return response.data;
         } catch (err: any) {
-            setError(err.response?.data?.message || "Login failed");
+            setError(err.response?.data?.message || "Signup failed");
+            toast.error(err.response?.data?.message, {
+                className: "font1-epundu tracking-wider",
+            });
             throw err;
         } finally {
             setLoading(false);
