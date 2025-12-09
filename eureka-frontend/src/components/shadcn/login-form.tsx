@@ -15,6 +15,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Loader from "../ui/Loader";
+import useStoreData from "@/store/store";
 
 export function LoginForm({
   className,
@@ -22,7 +23,8 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
+  const loggedIn = useStoreData(state => state.isLoggedIn);
+  const setLoggedIn = useStoreData(state => state.setIsLoggedIn);
   const { login, loading, setLoading, error, setError } = useLogin();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ export function LoginForm({
       });
       console.log("Logged in:", res);
       navigate('/chat');
+      setLoggedIn(true);
     } catch {
       // error handled in hook
     }

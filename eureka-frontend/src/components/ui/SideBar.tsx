@@ -18,7 +18,7 @@ const SideBar = ({
     h-screen flex flex-col 
     text-2xl  py-3
     ${open ? "w-1/4" : "w-12"} z-10 ml-auto transition-all duration-300
-    justify-between items-center border-r-gray-600 border-r-[0.5px] fixed`}
+    justify-between items-center border-r-gray-600 border-r-[0.5px] fixed top-0`}
     >
       <div
         onClick={() => {
