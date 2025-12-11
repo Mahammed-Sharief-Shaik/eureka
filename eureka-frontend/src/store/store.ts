@@ -18,7 +18,7 @@ const useStoreData = create<Store>(
                 isLoggedIn: false
             })
         },
-        isLoggedIn: false,
+        isLoggedIn: true,
         setIsLoggedIn: (val) => {
             set({
                 isLoggedIn: val
