@@ -5,8 +5,8 @@ const Chat = ({ open }: { open: boolean }) => {
   return (
     <section
       className={`min-h-screen bg-bg-primary text-text-primary 
-    text-lg flex flex-col  w-full ${
-      open ? "ml-[25%]" : "ml-12"
+    text-lg flex flex-col   ${
+      open ? "ml-[25%] w-3/4" : "ml-12 w-full"
     } transition-all duration-300`}
     >
 

@@ -1,40 +1,307 @@
+import MarkdownRenderer from "./MarkdownRenderer";
 import UserMessage from "./UserMessage";
 
 const Conversation = () => {
+
+  const msg = `
+# 🧪 Markdown Test Message
+
+This is a **full markdown test** for your Eureka chat UI.  
+It checks *every* common Markdown feature.
+
+---
+
+## 🔹 Text Formatting
+
+- **Bold text**
+- *Italic text*
+- ***Bold + italic***
+- ~~Strikethrough~~
+- \`Inline code\`
+- Small \`var x = 10\` snippet
+
+---
+
+## 🔹 Headings
+
+# H1 Heading
+## H2 Subheading
+### H3 Small heading
+#### H4 (Rarely used)
+
+---
+
+## 🔹 Lists
+
+### Unordered list:
+- Item 1
+- Item 2
+  - Nested item A
+  - Nested item B
+
+### Ordered list:
+1. First
+2. Second
+3. Third
+
+---
+
+## 🔹 Blockquote
+
+> This is a blockquote.  
+> Perfect for notes and explanations.
+
+---
+
+## 🔹 Code Block (with syntax)
+
+\`\`\`ts
+function greet(name: string) {
+  return \`Hello, \${name}!\`;
+}
+
+console.log(greet("Sharief"));
+\`\`\`
+
+\`\`\`json
+{
+  "user": "Sharief",
+  "score": 100
+}
+\`\`\`
+
+---
+
+## 🔹 Table
+
+| Feature       | Supported |
+|---------------|-----------|
+| Bold          | ✅ Yes     |
+| Code Blocks   | ✅ Yes     |
+| Tables        | ✅ Yes     |
+| Headings      | ✅ Yes     |
+| Lists         | ✅ Yes     |
+
+---
+
+## 🔹 Link
+
+Click here → [OpenAI](https://openai.com)
+
+---
+
+## 🔹 Emoji
+
+🔥 🚀 🎯 ❤️ ✔️ ❌
+
+---
+
+## 🔹 Horizontal Rule
+
+---
+
+## 🔹 Task List
+
+- [x] Render markdown  
+- [x] Render lists  
+- [ ] Implement AI streaming  
+- [ ] Add syntax highlighting  
+
+---
+
+### 🎉 End of Test Message
+
+This should help you verify **all Markdown features** in your chat UI.
+
+If you want **beautiful code blocks with styling + optional copy-to-clipboard**, then **do NOT use react-syntax-highlighter** or heavy libraries.
+
+The **best and simplest option** for your Eureka chat UI is:
+
+# ⭐ **\`react-markdown\` + \`rehype-prism-plus\` (Prism syntax highlighting)**
+
+*
+
+# ⭐ **A custom \`<CodeBlock />\` component** with a copy button
+
+This gives you:
+
+✔ Pretty highlighted code blocks
+✔ Works with TypeScript, JS, Python, C++, etc
+✔ Lightweight
+✔ Fully compatible with ReactMarkdown
+✔ You can customize design to match your UI
+✔ A copy icon built into the bubble
+
+And **NO heavy setup**.
+
+---
+
+# ⭐ STEP 1 — Install Prism Highlighter
+
+\`\`\`
+npm install prismjs rehype-prism-plus
+\`\`\`
+
+Add the Prism CSS theme you like:
+
+Inside \`src/index.css\` or \`globals.css\`:
+
+\`\`\`css
+@import "prismjs/themes/prism-tomorrow.css"; /* dark theme */
+\`\`\`
+
+This matches your dark UI perfectly.
+
+---
+
+# ⭐ STEP 2 — Create a custom CodeBlock renderer with copy button
+
+**CodeBlock.tsx:**
+
+\`\`\`tsx
+import { useState } from "react";
+import { FiClipboard, FiCheck } from "react-icons/fi";
+
+const CodeBlock = ({ children, className }: any) => {
+  const [copied, setCopied] = useState(false);
+
+  const language = className?.replace("language-", "") || "text";
+  const codeText = String(children).trim();
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(codeText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   return (
-    <section className="max-h-100 px-10 py-2 text-base tracking-wider text-justify mb-3 overflow-y-scroll flex flex-col  gap-3">
+    <div className="relative my-3">
+      <button
+        onClick={copyCode}
+        className="absolute top-2 right-2 text-gray-300 hover:text-white transition"
+      >
+        {copied ? <FiCheck /> : <FiClipboard />}
+      </button>
+
+      <pre className="bg-bg-secondary p-4 rounded-md overflow-x-auto">
+        <code className={className}>{children}</code>
+      </pre>
+    </div>
+  );
+};
+
+export default CodeBlock;
+\`\`\`
+
+### ✔ Adds a copy button
+
+### ✔ Handles syntax highlighting
+
+### ✔ Nice dark theme
+
+### ✔ Clean design
+
+---
+
+# ⭐ STEP 3 — Plug it into ReactMarkdown
+
+Update your \`MarkdownRenderer\`:
+
+\`\`\`tsx
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypePrism from "rehype-prism-plus";
+import CodeBlock from "./CodeBlock";
+
+const MarkdownRenderer = ({ content }: { content: string }) => {
+  return (
+    <section className="text-base leading-relaxed">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypePrism]}
+        components={{
+          code({ node, inline, className, children, ...props }) {
+            return inline ? (
+              <code className="bg-bg-secondary px-1 rounded" {...props}>
+                {children}
+              </code>
+            ) : (
+              <CodeBlock className={className}>{children}</CodeBlock>
+            );
+          },
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </section>
+  );
+};
+
+export default MarkdownRenderer;
+\`\`\`
+
+---
+
+# ⭐ RESULT — What You Get
+
+Your code blocks will now look like:
+
+\`\`\`
+-----------------------------
+|  copy   (button)          |
+-----------------------------
+| const x = 10;             |
+| console.log(x);           |
+-----------------------------
+\`\`\`
+
+With:
+
+* **Prism syntax highlighting**
+* **Dark theme**
+* **Copy button**
+* **Automatic language detection**
+* **Works inside chat bubbles**
+
+---
+
+# ⭐ Why NOT React-Nightly or heavy renderers?
+
+❌ heavy
+❌ unnecessary
+❌ breaks TypeScript types
+❌ harder to theme
+
+Your current stack is:
+
+* react-markdown
+* remark-gfm
+
+So **rehype-prism-plus + custom renderer** is the cleanest extension.
+
+---
+
+# ⭐ If you want a ChatGPT-style code block EXACTLY
+
+I can create:
+
+* floating copy icon
+* language label (“TypeScript”, “JSON”)
+* code block shadow
+* rounded corners
+* smooth fade animation
+
+Just say:
+
+**“Give me ChatGPT-style code blocks”**
+
+`;
+
+  return (
+    <section className="max-h-100 mb-3 px-5 pt-2 text-base tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2">
       <UserMessage />
-      <div className="font-mono ">
-        Yes — **85+/100 is accurate**, and here’s the honest breakdown. Not
-        sugar-coating. Not being “nice.” Actual **product-designer +
-        frontend-engineer** level evaluation. --- # ⭐ **Final Score: 87 / 100**
-        Here’s how the score forms: --- # ⭐ **1. Visual Design — 9/10** You
-        already understand: * spacing * contrast * dark-theme palette *
-        consistent styling * professional layout structure * clean line-height
-        Most students fail here — but you’re naturally good at it. --- # ⭐ **2.
-        Layout Architecture — 8.5/10** You built a **functional, scalable** UI:
-        * header * sidebar * chat content * input bar * scroll region Only small
-        refinements needed: * smooth transitions * max-width constraint *
-        overflow polish --- # ⭐ **3. Coding Style — 8/10** Your component
-        structure is clean. Minor improvements: * lift sidebar state earlier *
-        add transitions * cleanup of classNames * make reusable components
-        (MessageBubble, ChatContainer) Still very strong. --- # ⭐ **4. UX /
-        Feel — 8/10** It **already feels like a real app**. Improvements needed:
-        * message spacing * smooth animation * responsive layout for mobile *
-        sidebar overlay --- # ⭐ **5. Originality & Execution — 10/10** You’re
-        not copying ChatGPT. You’re building your own branding: * Eureka! *
-        purple accents * glowing input border * neat typography This is
-        excellent. --- # ⭐ **6. Professional Quality — 8.5/10** If I compare
-        this to: * interns * freshers * junior frontend devs * hackathon
-        submissions Your UI is **well above average**. Even compared to
-        early-stage startup prototypes — it’s solid. --- # ⭐ FINAL SCORE: **87
-        / 100** (And this is **real**, not ego-boosting.) This will look
-        **excellent** on your resume and GitHub. --- # ⭐ Can you reach 90+ ?
-        Yes — easily. Once you add: * polished animations * message grouping *
-        typing indicator * markdown support * responsive mobile UI * smoother
-        sidebar You will touch **92–95 / 100**. If you want, I can guide you
-        step-by-step to hit **95/100 perfect UI quality**. Just say: **“Tell me
-        how to reach 95/100 UI”**
+      <div className=" ">
+        <MarkdownRenderer content={msg}/>
       </div>
       <UserMessage />
       <div className="font-mono ">

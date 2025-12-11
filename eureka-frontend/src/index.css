@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@import "prismjs/themes/prism-tomorrow.css"; /* dark theme */
 
 /* Hide scrollbar for Chrome, Safari, Edge */
 ::-webkit-scrollbar {
@@ -186,4 +186,15 @@ Error: #F87171 (red-400)
 .animate-star-movement-top {
   animation: star-movement-top 10s linear infinite alternate;
   /* @apply absolute top-0 right-0; */
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #0f172a00;
+}
+
+pre[class*="language-"] {
+	padding: .5em;
+	margin: .25em 0;
+	overflow: auto;
 }
