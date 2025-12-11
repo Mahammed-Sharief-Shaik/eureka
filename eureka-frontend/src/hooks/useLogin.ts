@@ -17,7 +17,7 @@ export const useLogin = () => {
                 "http://localhost:8000/api/auth/login",
                 data
             );
-            console.log(response);
+            // console.log(response);
             localStorage.setItem("token", response.data.token);
             return response.data;
         } catch (err: any) {

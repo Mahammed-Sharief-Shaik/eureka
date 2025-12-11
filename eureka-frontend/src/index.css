@@ -198,3 +198,7 @@ pre[class*="language-"] {
 	margin: .25em 0;
 	overflow: auto;
 }
+
+.red{
+  @apply bg-primary;
+}

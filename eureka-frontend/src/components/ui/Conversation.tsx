@@ -2,8 +2,7 @@ import MarkdownRenderer from "./MarkdownRenderer";
 import UserMessage from "./UserMessage";
 
 const Conversation = () => {
-
-  const msg = `
+  const msg1 = `
 # 🧪 Markdown Test Message
 
 This is a **full markdown test** for your Eureka chat UI.  
@@ -297,11 +296,14 @@ Just say:
 
 `;
 
+  const msg = `The Two Sum problem can be a bit tricky when you're starting out. \n\nSo, you've tried using two loops, and you're getting a Time Limit Exceeded (TLE) error. That's because the two-loop approach has a time complexity of O(n^2), which can be slow for large inputs.\n\nLet's think about it: what if we could find a way to store the numbers we've seen so far and their indices, so we can quickly look up if the complement (the number we need to add to get the target) is already in our \"memory\"? \n\nCan you think of a data structure that would allow us to do this? Something that has a fast lookup time, like... maybe a hash table or a dictionary?\n\nWhat are your thoughts on this? Should we explore how to use a hash table to solve the Two Sum problem?`;
+
   return (
-    <section className="max-h-100 mb-3 px-5 pt-2 text-base tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2">
-      <UserMessage />
+    <section className=" max-h-150 lg:max-h-120 px-5 pt-2 text-base 
+    selection:bg-accent selection:text-bg-primary tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2">
+      {/* <UserMessage />
       <div className=" ">
-        <MarkdownRenderer content={msg}/>
+        <MarkdownRenderer content={msg1} />
       </div>
       <UserMessage />
       <div className="font-mono ">
@@ -322,7 +324,7 @@ Just say:
         repudiandae saepe, quo illum dolores. Tenetur nesciunt ullam nihil natus
         voluptate veniam?
       </div>
-      <UserMessage />
+      <UserMessage /> */}
     </section>
   );
 };

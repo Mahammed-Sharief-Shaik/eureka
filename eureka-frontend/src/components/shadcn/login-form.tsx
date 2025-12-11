@@ -23,9 +23,14 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const loggedIn = useStoreData(state => state.isLoggedIn);
-  const setLoggedIn = useStoreData(state => state.setIsLoggedIn);
+  const loggedIn = useStoreData((state) => state.isLoggedIn);
+  const setLoggedIn = useStoreData((state) => state.setIsLoggedIn);
+  const setUserName = useStoreData((state) => state.setUserName);
+  const setUserId = useStoreData((state) => state.setUserId);
+  const setMail = useStoreData((state) => state.setMail);
+
   const { login, loading, setLoading, error, setError } = useLogin();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -33,16 +38,20 @@ export function LoginForm({
     e.preventDefault();
     if (loading) return;
     setLoading(true);
-    const email = emailRef.current?.value ?? "";
+    const emailVal = emailRef.current?.value ?? "";
     const password = passwordRef.current?.value ?? "";
     try {
-      const res = await login({ email, password });
+      const res = await login({ email:emailVal, password });
       toast.success("Login Successful", {
         className: "font1-epundu tracking-wider",
       });
-      console.log("Logged in:", res);
-      navigate('/chat');
-      setLoggedIn(true);
+      // console.log("Logged in:", res.user);
+      const { name, id, email } = res.user;
+      navigate("/chat");
+      // setIsLoggedIn(true);
+      setUserName(name);
+      setUserId(id);
+      setMail(email);
     } catch {
       // error handled in hook
     }
@@ -126,8 +135,9 @@ export function LoginForm({
               src={LoginImage}
               alt="Image"
               className={`absolute inset-0 h-full w-full object-cover filter ${
-                loading ? 'grayscale' : 
-                error
+                loading
+                  ? "grayscale"
+                  : error
                   ? "hue-rotate-180 brightness-90 saturate-300  "
                   : "saturate-150"
               } `}

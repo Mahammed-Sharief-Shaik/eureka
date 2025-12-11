@@ -1,9 +1,6 @@
-import { FaUser } from "react-icons/fa6";
-import { CiChat2 } from "react-icons/ci";
 import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import { TbUserHexagon } from "react-icons/tb";
-import { useState } from "react";
-import { GiH2O } from "react-icons/gi";
+import useStoreData from "@/store/store.ts";
 
 const SideBar = ({
   open,
@@ -12,6 +9,16 @@ const SideBar = ({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) => {
+  // const [userName, userId, mail] = useStoreData((state) => [
+  //   state.userName,
+  //   state.userId,
+  //   state.mail,
+  // ]);
+
+  const userName = useStoreData((state) => state.userName);
+  const userId = useStoreData((state) => state.userId);
+  const mail = useStoreData((state) => state.mail);
+
   return (
     <aside
       className={`bg-bg-secondary 
@@ -33,24 +40,31 @@ const SideBar = ({
         )}
       </div>
 
-        <div className={`text-white ${!open && "hidden"}`}>
-            <h2 className="text-center text-accent">CHATS</h2>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-            <li>Lorem ipsum dolor </li>
-        </div>
+      <div className={`text-white ${!open && "hidden"}`}>
+        <h2 className="text-center text-accent">CHATS</h2>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+        <li>Lorem ipsum dolor </li>
+      </div>
 
       {/* <CiChat2 /> */}
       <div className="flex justify-center items-center flex-col ">
         <TbUserHexagon className="text-primary text-3xl" />
-        {open && (<h2 className="text-white font2-sour-gummy">Matrix</h2>)}
+        {open && (
+          <>
+            
+          <h2 className="text-white font2-sour-gummy">{` ${userName}`}</h2>
+          <h2 className="text-white font2-sour-gummy">{` ${userId}`}</h2>
+          <h2 className="text-white font2-sour-gummy">{` ${mail}`}</h2>
+          </>
+        )}
       </div>
     </aside>
   );

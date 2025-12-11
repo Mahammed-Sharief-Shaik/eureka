@@ -1,3 +1,5 @@
+import type { UserInfoType } from "./user";
+
 export interface LoginFormData {
     email: string;
     password: string;
@@ -13,6 +15,7 @@ export interface SignupFormData {
 export interface LoginResponse {
     token: string;
     message?: string;
+    user : UserInfoType
 }
 
 export interface SignupResponse {

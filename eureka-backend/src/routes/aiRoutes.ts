@@ -29,6 +29,11 @@ router.get('/test',
     }
 );
 
+router.post('/create-chat',
+    async (req,res) => {
+        
+    }
+)
 
 
 export default router;
