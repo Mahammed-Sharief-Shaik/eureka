@@ -10,7 +10,8 @@ export type Store = {
     setMail: (mail: string) => void;
     isLoggedIn: boolean;
     setIsLoggedIn: (status: boolean) => void;
-    currentChat : ChatContent;
-    setCurrentChat : (chat : ChatContent) => void;
-    addToCurrentChat : (message : MessageType) => void; 
+    currentChat: ChatContent;
+    setCurrentChat: (chat: ChatContent) => void;
+    addToCurrentChat: (message: MessageType) => void;
+    setCurrentChatIdName: (cId: number, cName: string) => void;
 }

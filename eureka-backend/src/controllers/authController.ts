@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { LoginRequestBody, SignupRequestBody } from "../types/index.js";
 import prisma from "../prisma.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import "dotenv/config"
-const loginUser = async (req: Request<{}, {}, LoginRequestBody>, res: Response) => {
+const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     console.log("Login request : ");
     console.table(req.body);
@@ -19,7 +18,7 @@ const loginUser = async (req: Request<{}, {}, LoginRequestBody>, res: Response) 
         if (!matches) return res.status(401).json({ message: "Invalid Password." });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: "1h" });
-        console.log("Token : ", token);
+        // console.log("Token : ", token);
         return res.status(200).json({
             message: "User logged in successfully",
             token,
@@ -33,7 +32,7 @@ const loginUser = async (req: Request<{}, {}, LoginRequestBody>, res: Response) 
 
 }
 
-const signupUser = async (req: Request<{}, {}, SignupRequestBody>, res: Response) => {
+const signupUser = async (req: Request, res: Response) => {
     console.log("Signup request  : ", req.body);
     const { name, email, password } = req.body;
     try {

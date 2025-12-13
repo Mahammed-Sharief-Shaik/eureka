@@ -1,6 +1,8 @@
 import express from 'express'
 import { groq } from "../groq.js";
 import "dotenv/config"
+import { jwtVerify } from '../middlewares/jwtVerify.js';
+import { createChat, generateReply } from '../controllers/aiControllers.js';
 const router = express.Router();
 
 router.get('/',
@@ -16,24 +18,27 @@ router.get('/test',
             model: "llama-3.3-70b-versatile",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
-                { role: "user", content: "I was solving this question two sum, i tried with two loops but getting TLE so what can i do" },
+                { role: "user", content: "Isomorphic strings - explain the problem statement in detail with examples" },
             ],
         });
-
-        // console.log(response.choices[0].message.content);
         res.json(
             {
                 reply: response.choices[0].message.content
             }
-        )
+        );
     }
 );
 
-router.post('/create-chat',
-    async (req,res) => {
-        
-    }
-)
+router.get('/create-chat', (req, res) => res.send("WORKING /create-chat"));
+router.post('/create-chat', jwtVerify,
+    // router.post('/create-chat',
+    createChat
+);
+
+router.post('/generate', jwtVerify,
+    generateReply
+);
+
 
 
 export default router;

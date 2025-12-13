@@ -3,25 +3,27 @@ import StarBorder from "../shadcn/StarBorder";
 import { GrSend } from "react-icons/gr";
 import { toast } from "sonner";
 import useStoreData from "@/store/store";
+import { useCreateChat } from "@/hooks/useCreateChat";
 
 const ChatInputBox = () => {
-  const {chatId, content} = useStoreData(state => state.currentChat);
-
-
+  const { chatId, content } = useStoreData((state) => state.currentChat);
+  const { createChat, generateReply } = useCreateChat();
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
   const handleSubmit = () => {
-    
     const userMessage = inputRef.current?.value;
-    if(!userMessage) {
+    if (!userMessage) {
       toast.error("Prompt can't be empty");
       return;
     }
 
-    if(!chatId) {
-      
+    if (!chatId) {
+      createChat(userMessage);
+    } else {
+      generateReply(userMessage);
     }
-
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   return (

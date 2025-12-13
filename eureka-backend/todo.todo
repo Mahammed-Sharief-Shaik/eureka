@@ -1,3 +1,39 @@
+create chat 
+
+frontend User sends the first message 
+backend creates the name for chat based on 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 users
 Column	Type	Notes
 user_id	UUID PK	

@@ -8,4 +8,3 @@ const adapter = new PrismaPg({
 
 const prisma = new PrismaClient({ adapter });
 export default prisma;
-// use `prisma` in your application to read and write data in your DB

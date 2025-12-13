@@ -34,6 +34,7 @@ const useStoreData = create<Store>(
         },
         currentChat: {
             chatId: null,
+            title: null,
             content: []
         },
         setCurrentChat: (chat) => {
@@ -48,7 +49,16 @@ const useStoreData = create<Store>(
                     content: [...state.currentChat.content, message], // clone + append
                 },
             })
-        ),
+            ),
+        setCurrentChatIdName: (cId, cName) => {
+            set((state) => ({
+                currentChat: {
+                    chatId: cId,
+                    title: cName,
+                    content: [...state.currentChat.content]
+                }
+            }))
+        },
 
     }));
 

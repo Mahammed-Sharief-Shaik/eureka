@@ -1,0 +1,21 @@
+{
+  "name": "day-108-109-110-118-119-120-121-122-123-124-125-126-(eureka)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahammed-Sharief-Shaik/eureka.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mahammed-Sharief-Shaik/eureka/issues"
+  },
+  "homepage": "https://github.com/Mahammed-Sharief-Shaik/eureka#readme"
+}
