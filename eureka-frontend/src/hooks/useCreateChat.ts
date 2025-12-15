@@ -1,16 +1,20 @@
 import useStoreData from "@/store/store";
 import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export const useCreateChat = () => {
   const setCurrentChatIdName = useStoreData(state => state.setCurrentChatIdName);
   const addToCurrentChat = useStoreData(state => state.addToCurrentChat);
   const currentChat = useStoreData(state => state.currentChat);
+  const addToChatList = useStoreData(state => state.addToChatList)
 
+  const [loading, setLoading] = useState<boolean>(false);
   const generateReply = async (message: string) => {
+    setLoading(true);
     addToCurrentChat({
-      role: 'User',
-      message
+      role: 'USER',
+      content : message
     });
     try {
       const response = await axios.post(
@@ -29,22 +33,25 @@ export const useCreateChat = () => {
       console.log(response);
 
       addToCurrentChat({
-        role: "AI",
-        message: response.data
+        role: "ASSISTANT",
+        content: response.data
       });
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   }
 
 
   const createChat = async (message: string) => {
+    setLoading(true);
     addToCurrentChat(
-        {
-          role: "User",
-          message: message
-        }
-      );
+      {
+        role: "USER",
+        content: message
+      }
+    );
     try {
       const response = await axios.post(
         "http://localhost:8000/api/ai/create-chat",
@@ -61,12 +68,14 @@ export const useCreateChat = () => {
       console.log(response);
       const { id, title } = response.data.conversation;
       setCurrentChatIdName(id, title);
-      
+      addToChatList({
+        id, title
+      })
 
       addToCurrentChat(
         {
-          role: "AI",
-          message: response.data.firstReply
+          role: "ASSISTANT",
+          content: response.data.firstReply
         }
       );
 
@@ -76,10 +85,10 @@ export const useCreateChat = () => {
     } catch (error) {
       console.log(error);
       toast.error(JSON.stringify(error));
-    }
+    } finally { setLoading(false) }
   };
 
 
 
-  return { createChat, generateReply };
+  return { createChat, generateReply, loading, setLoading };
 };

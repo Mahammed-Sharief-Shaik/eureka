@@ -1,6 +1,6 @@
 export type MessageType = {
-    role: "AI" | "User";
-    message: string;
+    role: "ASSISTANT" | "USER";
+    content: string;
 }
 
 export type ChatContent = {
@@ -9,3 +9,7 @@ export type ChatContent = {
     content: MessageType[];
 }
 
+export type ChatList = {
+    id : number;
+    title : string
+}

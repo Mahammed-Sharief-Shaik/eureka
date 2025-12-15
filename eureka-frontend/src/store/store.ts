@@ -1,8 +1,5 @@
 import type { Store } from "@/types";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware"
-
-
 
 const useStoreData = create<Store>(
     (set) => ({
@@ -37,10 +34,15 @@ const useStoreData = create<Store>(
             title: null,
             content: []
         },
-        setCurrentChat: (chat) => {
-            set({
-                currentChat: chat
-            })
+        setCurrentChatContent: (chat) => {
+            set(
+                (state) =>
+                ({
+                    currentChat: {
+                        ...state.currentChat,
+                        content: chat
+                    }
+                }))
         },
         addToCurrentChat: (message) =>
             set((state) => ({
@@ -58,6 +60,22 @@ const useStoreData = create<Store>(
                     content: [...state.currentChat.content]
                 }
             }))
+        },
+        chatList: [],
+        setChatList(list) {
+            set({
+                chatList: list
+            })
+        },
+        addToChatList: (chat) => {
+            set(
+                (state) => ({
+                    chatList: [
+                        ...state.chatList,
+                        chat
+                    ]
+                })
+            )
         },
 
     }));

@@ -8,6 +8,4 @@ export const addMessageToChat = async (message: string, role: "USER" | "ASSISTAN
             conversationId: conversationId
         }
     });
-    
-
 }

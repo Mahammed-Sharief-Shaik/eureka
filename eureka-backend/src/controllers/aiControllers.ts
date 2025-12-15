@@ -4,6 +4,8 @@ import prisma from "../prisma.js";
 import "dotenv/config"
 import { addMessageToChat } from "../db/addMessageToChat.js";
 import { getLastChats } from "../db/getLastChats.js";
+import { getChats } from "../db/getChats.js";
+import { getChatConv } from "../db/getChatConv.js";
 
 
 type ChatMessage = {
@@ -49,31 +51,31 @@ const getFirstReply = async (firstMessage: string, conversationId: number) => {
 }
 
 const getReply = async (msg: string, conversationId: number, userId: number | undefined) => {
-    const messages: ChatMessage[] = [
-        {
-            role: "system",
-            content: process.env.SYSTEM_PROMPT!,
-        },
-    ];
-
     if (!userId) return;
     const last5Messages = await getLastChats(conversationId, userId);
     // console.log(last5Messages);
-
-
-
-    messages.push({
-        role: "user",
-        content: msg
-    });
-
+    const historyMessages: ChatMessage[] = last5Messages.map((m) => ({
+        role: m.role === "USER" ? "user" : "assistant",
+        content: m.content, // or m.content depending on schema
+    }));
 
     const response = await groq.chat.completions.create({
         model: "llama-3.3-70b-versatile",
-        messages: messages,
+        messages: [
+            {
+                role: "system",
+                content: process.env.SYSTEM_PROMPT!,
+            },
+            ...historyMessages,
+            {
+                role: "user",
+                content: msg
+            }
+        ],
     });
-
-    return response.choices[0].message.content!;
+    const reply = response.choices[0].message.content!;
+    await addMessageToChat(reply, "ASSISTANT", conversationId)
+    return reply;
 }
 
 export const createChat = async (req: Request, res: Response) => {
@@ -113,12 +115,40 @@ export const createChat = async (req: Request, res: Response) => {
 
 export const generateReply = async (req: Request, res: Response) => {
 
+    await addMessageToChat(req.body.message, "USER", req.body.conversationId)
     const reply = await getReply(req.body.message, req.body.conversationId, req.user?.id);
-    res.json(reply);
+    res.status(200).json(reply);
 }
 
+export const chatController = async (req: Request, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    try {
+
+        const userChats = await getChats(req.user.id);
+
+        res.status(200).json({
+            chats: userChats,
+        });
+    } catch (e) {
+        res.status(500).json({
+            message: "Error retriving chats",
+        })
+    }
+};
 
 
+export const getChatContent = async (req: Request, res: Response) => {
+    try {
+        const chatContent = await getChatConv(parseInt(req.params.id));
 
+        res.status(200).json({
+            chat: chatContent
+        })
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching chats" });
+    }
+}
 
 

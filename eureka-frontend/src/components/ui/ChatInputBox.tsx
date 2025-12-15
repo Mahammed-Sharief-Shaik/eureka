@@ -4,10 +4,11 @@ import { GrSend } from "react-icons/gr";
 import { toast } from "sonner";
 import useStoreData from "@/store/store";
 import { useCreateChat } from "@/hooks/useCreateChat";
+import Loader from "./Loader";
 
 const ChatInputBox = () => {
-  const { chatId, content } = useStoreData((state) => state.currentChat);
-  const { createChat, generateReply } = useCreateChat();
+  const { chatId } = useStoreData((state) => state.currentChat);
+  const { createChat, generateReply, loading } = useCreateChat();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const handleSubmit = () => {
     const userMessage = inputRef.current?.value;
@@ -27,7 +28,7 @@ const ChatInputBox = () => {
   };
 
   return (
-    <section className="w-full  mb-2 flex items-center justify-center gap-5 mt-auto">
+    <section className="w-full  mb-2 flex items-center  justify-center gap-5 mt-auto">
       <StarBorder color="white" speed="5s" thickness={2} className="w-3/4 ">
         <div className="flex items-center justify-center gap-2">
           <textarea
@@ -41,9 +42,11 @@ const ChatInputBox = () => {
         </div>
       </StarBorder>
       <button
-        className="hover:cursor-pointer lavendar-btn p-[5px] rounded-md hover:scale-105 active:scale-95 transition-transform duration-200"
+        className="hover:cursor-pointer relative  lavendar-btn p-[5px] rounded-md hover:scale-105 active:scale-95 transition-transform duration-200"
         onClick={handleSubmit}
       >
+        {loading && <Loader />}
+
         <GrSend className="text-3xl text-white bg-primary" />
       </button>
     </section>

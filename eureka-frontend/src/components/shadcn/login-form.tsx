@@ -52,6 +52,7 @@ export function LoginForm({
       setUserName(name);
       setUserId(id);
       setMail(email);
+      setLoggedIn(true);
     } catch {
       // error handled in hook
     }

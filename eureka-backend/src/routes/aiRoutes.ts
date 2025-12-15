@@ -2,7 +2,7 @@ import express from 'express'
 import { groq } from "../groq.js";
 import "dotenv/config"
 import { jwtVerify } from '../middlewares/jwtVerify.js';
-import { createChat, generateReply } from '../controllers/aiControllers.js';
+import { chatController, createChat, generateReply, getChatContent } from '../controllers/aiControllers.js';
 const router = express.Router();
 
 router.get('/',
@@ -31,7 +31,6 @@ router.get('/test',
 
 router.get('/create-chat', (req, res) => res.send("WORKING /create-chat"));
 router.post('/create-chat', jwtVerify,
-    // router.post('/create-chat',
     createChat
 );
 
@@ -39,6 +38,13 @@ router.post('/generate', jwtVerify,
     generateReply
 );
 
+router.get('/chats', jwtVerify,
+    chatController
+);
 
+router.get(
+    '/chat/:id', jwtVerify,
+    getChatContent
+)
 
 export default router;

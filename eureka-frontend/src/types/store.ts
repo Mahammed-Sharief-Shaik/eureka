@@ -1,4 +1,4 @@
-import type { ChatContent, MessageType } from "./chat";
+import type { ChatContent, ChatList, MessageType } from "./chat";
 
 export type Store = {
     userName: string;
@@ -11,7 +11,10 @@ export type Store = {
     isLoggedIn: boolean;
     setIsLoggedIn: (status: boolean) => void;
     currentChat: ChatContent;
-    setCurrentChat: (chat: ChatContent) => void;
+    setCurrentChatContent : (chat: MessageType[]) => void;
     addToCurrentChat: (message: MessageType) => void;
     setCurrentChatIdName: (cId: number, cName: string) => void;
+    chatList: ChatList[],
+    setChatList: (list: ChatList[]) => void;
+    addToChatList : (chat : ChatList) => void;
 }
