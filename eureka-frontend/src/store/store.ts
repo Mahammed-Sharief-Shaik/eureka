@@ -15,6 +15,7 @@ const useStoreData = create<Store>(
                 userName: "",
                 isLoggedIn: false
             })
+            localStorage.clear();
         },
         mail: "",
 
@@ -23,7 +24,7 @@ const useStoreData = create<Store>(
                 mail: mailID
             })
         },
-        isLoggedIn: true,
+        isLoggedIn: false,
         setIsLoggedIn: (val) => {
             set({
                 isLoggedIn: val

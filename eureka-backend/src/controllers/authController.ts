@@ -17,7 +17,7 @@ const loginUser = async (req: Request, res: Response) => {
         const matches = await bcrypt.compare(password, hashedPassword);
         if (!matches) return res.status(401).json({ message: "Invalid Password." });
 
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: "6h" });
         // console.log("Token : ", token);
         return res.status(200).json({
             message: "User logged in successfully",

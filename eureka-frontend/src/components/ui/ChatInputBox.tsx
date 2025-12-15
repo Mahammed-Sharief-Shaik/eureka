@@ -28,7 +28,7 @@ const ChatInputBox = () => {
   };
 
   return (
-    <section className="w-full  mb-2 flex items-center  justify-center gap-5 mt-auto">
+    <section className="w-full  flex items-center  justify-center gap-5 py-1 mt-auto">
       <StarBorder color="white" speed="5s" thickness={2} className="w-3/4 ">
         <div className="flex items-center justify-center gap-2">
           <textarea
@@ -42,7 +42,9 @@ const ChatInputBox = () => {
         </div>
       </StarBorder>
       <button
-        className="hover:cursor-pointer relative  lavendar-btn p-[5px] rounded-md hover:scale-105 active:scale-95 transition-transform duration-200"
+        className="hover:cursor-pointer relative  
+        lavendar-btn p-1 rounded-md hover:scale-105 a
+        ctive:scale-95 transition-transform duration-200"
         onClick={handleSubmit}
       >
         {loading && <Loader />}

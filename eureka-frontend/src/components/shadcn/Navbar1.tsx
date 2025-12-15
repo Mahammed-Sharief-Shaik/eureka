@@ -136,8 +136,10 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   const loggedIn = useStoreData((state) => state.isLoggedIn);
   return (
-    <section className={`py-2 px-5  text-white bg-bg-secondary
-      border-b-[0.5px] border-gray-600 ${loggedIn && 'hidden'}`}>
+    <section
+      className={`py-2 px-5  text-white bg-bg-secondary
+      border-b-[0.5px] border-gray-600 ${loggedIn && "hidden"}`}
+    >
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">

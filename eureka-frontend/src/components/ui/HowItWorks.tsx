@@ -10,23 +10,23 @@ export type ContentType = {
 const HowItWorks = () => {
   const content: ContentType[] = [
     {
-      icon: <Fa1 className="text-5xl text-accent" />,
+      icon: <Fa1 className="text-3xl lg:text-5xl text-accent" />,
       text: "Pick a Question — test your problem-solving muscles.",
     },
     {
-      icon: <Fa2 className="text-5xl text-accent" />,
+      icon: <Fa2 className="text-3xl lg:text-5xl text-accent" />,
       text: "Stuck midway? Just say “Eureka!” and get guided, not spoiled.",
     },
     {
-      icon: <Fa3 className="text-5xl text-accent" />,
+      icon: <Fa3 className="text-3xl lg:text-5xl text-accent" />,
       text: "Chat with your AI mentor — unlock logic, not leaked code.",
     },
     {
-      icon: <Fa4 className="text-5xl text-accent" />,
+      icon: <Fa4 className="text-3xl lg:text-5xl text-accent" />,
       text: "Build it. Debug it. Own it. No copy-paste shortcuts.",
     },
     {
-      icon: <Fa5 className="text-5xl text-accent" />,
+      icon: <Fa5 className="text-3xl lg:text-5xl text-accent" />,
       text: "Grow your coder intuition — one hint at a time.",
     },
   ];

@@ -1,14 +1,20 @@
+import Nav2 from "@/components/ui/Nav2";
+import useStoreData from "@/store/store";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { GrMail } from "react-icons/gr";
 
 function About() {
+  const isLoggedIn = useStoreData((state) => state.isLoggedIn);
   return (
     <section
       id="about"
-      className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] flex flex-col items-center justify-center px-6 py-20"
+      className=" bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] 
+      flex flex-col items-center justify-between
+      "
     >
+      {isLoggedIn && <Nav2 />}
       {/* Heading */}
-      <div className="max-w-4xl text-center">
+      <div className="max-w-4xl py-3 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-[var(--color-accent)]">
           About Eureka
         </h2>
@@ -57,7 +63,7 @@ function About() {
             <FaLinkedin />
           </a>
           <a
-            href="mailto:yourmail@example.com"
+            href="mailto:mahammedshariefsk@gmail.com"
             className="text-[var(--color-primary)] hover:text-[var(--color-accent)] text-2xl transition-all duration-200"
           >
             <GrMail />

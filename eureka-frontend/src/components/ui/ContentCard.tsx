@@ -7,7 +7,7 @@ const ContentCard = ({
 }: ContentType & { index: number }) => {
   return (
     <div
-      className={`content-card py-5 px-5
+      className={`content-card py-2 px-5
   flex  items-center rounded-full w-full md:w-3/5 justify-start
     ${index % 2 === 0 ? "flex-row-reverse ml-auto " : "mr-auto "} 
      flex justify-center items-center gap-2
