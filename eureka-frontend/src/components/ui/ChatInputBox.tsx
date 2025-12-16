@@ -13,7 +13,9 @@ const ChatInputBox = () => {
   const handleSubmit = () => {
     const userMessage = inputRef.current?.value;
     if (!userMessage) {
-      toast.error("Prompt can't be empty");
+      toast.error("Prompt can't be empty", {
+        className: "font1-epundu tracking-wider",
+      });
       return;
     }
 
@@ -34,13 +36,23 @@ const ChatInputBox = () => {
           <textarea
             name="chat"
             id="chatbox"
-            placeholder="Say Eureka!"
+            placeholder="Say Eureka! (Ctrl + Enter to send)"
             required
+            aria-required
             ref={inputRef}
-            className="w-full  resize-none outline-none text-white placeholder-gray-400 p-4 rounded-md bg-transparent min-h-[70px]"
+            onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+              if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+                event.preventDefault();
+                handleSubmit();
+              }
+            }}
+            className="w-full  resize-none outline-none
+            placeholder:text-xs md:placeholder:text-sm
+            text-white placeholder-gray-400 p-4 rounded-md bg-transparent min-h-[70px]"
           ></textarea>
         </div>
       </StarBorder>
+
       <button
         className="hover:cursor-pointer relative  
         lavendar-btn p-1 rounded-md hover:scale-105 a

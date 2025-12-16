@@ -11,10 +11,13 @@ const Signup = () => {
   useEffect(() => {
     const checkLogin = () => {
       if (isLoggedIn) {
-        toast.warning("Already Logged in !");
+        toast.warning("Already Logged in !", {
+          className: "font1-epundu tracking-wider",
+        });
         navigate("/chat");
       }
     };
+
     checkLogin();
   });
   return (

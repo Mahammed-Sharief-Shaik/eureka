@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { isTokenExpired } from "./utils/auth.ts";
 import { toast } from "sonner";
 import useStoreData from "./store/store.ts";
-import Nav2 from "./components/ui/Nav2.tsx";
+import { TooltipProvider } from "./components/ui/tooltip.tsx";
 
 const App = () => {
   const logoutUser = useStoreData((state) => state.logoutUser);
@@ -22,8 +22,10 @@ const App = () => {
   useEffect(() => {
     const checkLogged = () => {
       if (isTokenExpired()) {
+        toast.warning("Session Expired!", {
+          className: "font1-epundu tracking-wider",
+        });
         logoutUser();
-        toast.warning("Session Expired!");
         return <Navigate to="/" replace />;
       } else {
         setIsLoggedIn(true);
@@ -39,17 +41,17 @@ const App = () => {
 
   return (
     <>
-      {/* {loggedIn && <Nav2 />} */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/about" element={<About />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<About />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/chat" element={<ChatUi />} />
-        </Route>
-      </Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/chat" element={<ChatUi />} />
+          </Route>
+        </Routes>
+    
     </>
   );
 };

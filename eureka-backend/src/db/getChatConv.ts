@@ -1,3 +1,4 @@
+import { timeWaste } from "../controllers/authController.js";
 import prisma from "../prisma.js"
 
 export const getChatConv = async (id: number) => {
@@ -10,6 +11,6 @@ export const getChatConv = async (id: number) => {
                 createdAt: "asc"
             }
         });
-
+        await timeWaste(5);
         return response;
 }

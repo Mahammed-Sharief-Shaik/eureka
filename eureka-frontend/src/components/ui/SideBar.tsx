@@ -6,6 +6,7 @@ import axios from "axios";
 import ChatListElement from "./ChatListElement";
 import { MdHistory } from "react-icons/md";
 import LogoDisp from "./LogoDisp";
+import { MdLogout } from "react-icons/md";
 
 const SideBar = ({
   open,
@@ -17,6 +18,7 @@ const SideBar = ({
   const setChatList = useStoreData((state) => state.setChatList);
   const chatList = useStoreData((state) => state.chatList);
   const userName = useStoreData((state) => state.userName);
+  const logoutUser = useStoreData((state) => state.logoutUser);
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -56,7 +58,7 @@ const SideBar = ({
         )}
       </div>
 
-      <h2 className="text-center text-accent font2-sour-gummy">
+      <h2 className="text-center text-accent font2-sour-gummy mt-1">
         {open ? (
           "History"
         ) : (
@@ -78,9 +80,23 @@ const SideBar = ({
         </div>
       </div>
 
-      <div className=" flex justify-center items-center  flex-col">
-        <TbUserHexagon className="text-primary text-3xl" />
-        {open && <h2 className="text-white text-sm ">{userName}</h2>}
+      <div className=" flex justify-center items-center gap-1 flex-col">
+        <div className="flex flex-col justify-center items-center">
+          <TbUserHexagon className="text-primary text-3xl" />
+          {open && <h2 className="text-white text-sm ">{userName}</h2>}
+        </div>
+        <div
+          className="flex justify-center items-center cursor-pointer flex-col"
+          onClick={logoutUser}
+        >
+          {!open ? (
+            <MdLogout className="text-white cursor-pointer  hover:text-error" />
+          ) : (
+            <button className="white-btn rounded-md cursor-pointer px-2 my-1 text-sm">
+              Logout
+            </button>
+          )}
+        </div>
       </div>
     </aside>
   );

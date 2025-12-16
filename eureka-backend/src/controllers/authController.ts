@@ -5,8 +5,7 @@ import jwt from "jsonwebtoken";
 import "dotenv/config"
 const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    console.log("Login request : ");
-    console.table(req.body);
+
     try {
         const user = await prisma.user.findUnique({
             where: { email }
@@ -33,7 +32,7 @@ const loginUser = async (req: Request, res: Response) => {
 }
 
 const signupUser = async (req: Request, res: Response) => {
-    console.log("Signup request  : ", req.body);
+    // console.log("Signup request  : ", req.body);
     const { name, email, password } = req.body;
     try {
 
@@ -67,8 +66,8 @@ const signupUser = async (req: Request, res: Response) => {
 
 }
 
-async function timeWaste() {
-    return new Promise(resolve => setTimeout(resolve, 3000))
+export async function timeWaste(sec: number) {
+    return new Promise(resolve => setTimeout(resolve, sec * 1000))
 }
 
 

@@ -15,6 +15,10 @@ const useStoreData = create<Store>(
                 userName: "",
                 isLoggedIn: false
             })
+            // toast.info("Logged out",
+            //     {
+            //         className: "font1-epundu tracking-wider",
+            //     });
             localStorage.clear();
         },
         mail: "",
@@ -35,6 +39,14 @@ const useStoreData = create<Store>(
             title: null,
             content: []
         },
+        setCurrentChat: (chat => {
+            set(
+                {
+                    currentChat: chat
+                }
+            )
+        })
+        ,
         setCurrentChatContent: (chat) => {
             set(
                 (state) =>
@@ -78,6 +90,12 @@ const useStoreData = create<Store>(
                 })
             )
         },
+        chatLoading: false,
+        setChatLoading: (val) => {
+            set({
+                chatLoading: val
+            })
+        }
 
     }));
 

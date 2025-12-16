@@ -84,7 +84,10 @@ export const useCreateChat = () => {
 
     } catch (error) {
       console.log(error);
-      toast.error(JSON.stringify(error));
+      toast.error(JSON.stringify(error), 
+        {
+        className: "font1-epundu tracking-wider",
+      });
     } finally { setLoading(false) }
   };
 

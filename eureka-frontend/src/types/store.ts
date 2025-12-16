@@ -11,10 +11,14 @@ export type Store = {
     isLoggedIn: boolean;
     setIsLoggedIn: (status: boolean) => void;
     currentChat: ChatContent;
-    setCurrentChatContent : (chat: MessageType[]) => void;
+    setCurrentChat: (chat: ChatContent) => void;
+    setCurrentChatContent: (chat: MessageType[]) => void;
     addToCurrentChat: (message: MessageType) => void;
     setCurrentChatIdName: (cId: number, cName: string) => void;
     chatList: ChatList[],
     setChatList: (list: ChatList[]) => void;
-    addToChatList : (chat : ChatList) => void;
+    addToChatList: (chat: ChatList) => void;
+
+    chatLoading: boolean;
+    setChatLoading: (val: boolean) => void;
 }

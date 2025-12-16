@@ -1,9 +1,13 @@
 import { RiChatSmileAiFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import LogoDisp from "./LogoDisp";
+import useStoreData from "@/store/store";
 
 const Nav2 = () => {
   const navigate = useNavigate();
+  const setCurrentChat = useStoreData((state) => state.setCurrentChat);
+  const logoutUser = useStoreData((state) => state.logoutUser);
+  const isLoggedIn = useStoreData((state) => state.isLoggedIn);
   return (
     <section
       className="flex justify-evenly items-center gap-3 py-1 w-full 
@@ -11,14 +15,32 @@ const Nav2 = () => {
       bg-bg-secondary"
     >
       <LogoDisp />
-      <RiChatSmileAiFill
-        className="text-2xl text-primary cursor-pointer"
+
+      <button
+        className="font2-sour-gummy flex justify-center text-xs md:text-sm
+         items-center gap-2 cursor-pointer text-white lavendar-btn rounded-full px-2"
         onClick={() => {
-        //   navigate("/");
-        
+          document.title = "Eureka !";
           navigate("/chat");
+          setCurrentChat({
+            chatId: null,
+            title: null,
+            content: [],
+          });
         }}
-      />
+      >
+        <RiChatSmileAiFill className="text-2xl " />
+        New Chat
+      </button>
+      {
+        window.location.pathname==='/' &&
+        <button
+          className="white-btn cursor-pointer px-2 py-1 rounded-md"
+          onClick={logoutUser}
+        >
+          Logout
+        </button>
+      }
     </section>
   );
 };

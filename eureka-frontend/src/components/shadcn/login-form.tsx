@@ -9,14 +9,14 @@ import {
   FieldLabel,
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useLogin } from "@/hooks/useLogin";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 import Loader from "../ui/Loader";
 import useStoreData from "@/store/store";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 export function LoginForm({
   className,
   ...props
@@ -27,11 +27,34 @@ export function LoginForm({
   const setUserName = useStoreData((state) => state.setUserName);
   const setUserId = useStoreData((state) => state.setUserId);
   const setMail = useStoreData((state) => state.setMail);
-
-  const { login, loading, setLoading, error } = useLogin();
+  const isJustLoggingIn = useRef(false);
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { login, loading, setLoading, error } = useLogin();
+  const isLoggedIn = useStoreData((state) => state.isLoggedIn);
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   const checkLogin = () => {
+  //     if (isLoggedIn) {
+  //       toast.warning("Already Logged in !", {
+  //         className: "font1-epundu tracking-wider",
+  //       });
+  //       navigate("/chat");
+  //     }
+  //   };
+  //   setTimeout(() => {
+  //     checkLogin();
+  //   }, 1000);
+  // });
+  useEffect(() => {
+    // 3. Only run the check if we are NOT currently in the middle of a login action
+    if (isLoggedIn && !isJustLoggingIn.current) {
+      toast.warning("Already Logged in !", {
+        className: "font1-epundu tracking-wider",
+      });
+      navigate("/chat");
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,6 +64,7 @@ export function LoginForm({
     const password = passwordRef.current?.value ?? "";
     try {
       const res = await login({ email: emailVal, password });
+      isJustLoggingIn.current = true;
       toast.success("Login Successful", {
         className: "font1-epundu tracking-wider",
       });
@@ -54,12 +78,12 @@ export function LoginForm({
       setMail(email);
       setLoggedIn(true);
     } catch {
-      // error handled in hook
+      isJustLoggingIn.current = false;
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
+    <div className={cn("flex flex-col gap-6 py-5", className)} {...props}>
       {loading && <Loader />}
       <Card className="overflow-hidden p-0 w-9/10 md:w-3/4 mx-auto ring-1 ring-white shadow-lg shadow-accent">
         <CardContent className="grid p-0 md:grid-cols-2">

@@ -11,21 +11,20 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
         rehypePlugins={[rehypePrism]}
         components={{
           p({ children }) {
-            return <div className="mb-3">{children}</div>;
+            return <div>{children}</div>;
           },
-
           code({ inline, className, children, ...props }) {
-            return inline ? (
-              <code
-                className="bg-bg-secondary px-1 rounded-md"
-                {...props}
-              >
+            // 1. Check if the class name indicates a language (e.g., "language-python")
+            const match = /language-(\w+)/.exec(className || "");
+
+            // 2. If it has a language match, render the big CodeBlock.
+            //    Otherwise, render the small inline code style.
+            return match ? (
+              <CodeBlock className={className}>{children}</CodeBlock>
+            ) : (
+              <code className="bg-bg-secondary px-1 rounded-md" {...props}>
                 {children}
               </code>
-            ) : (
-              <CodeBlock className={className}>
-                {children}
-              </CodeBlock>
             );
           },
         }}

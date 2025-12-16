@@ -1,6 +1,8 @@
 import { ArrowDownRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import useStoreData from "@/store/store";
+import { useNavigate } from "react-router-dom";
 
 interface Hero3Props {
   heading?: string;
@@ -30,8 +32,8 @@ const Hero3 = ({
   description = "Step-by-step hints that sharpen your problem-solving mindset—without spoiling the answer.",
   buttons = {
     primary: {
-      text: "Sign Up",
-      url: "/signup",
+      text: `Sign Up`,
+      url: `/signup`,
     },
     secondary: {
       text: "Know More",
@@ -39,22 +41,35 @@ const Hero3 = ({
     },
   },
 }: Hero3Props) => {
+  const isLoggedIn = useStoreData((state) => state.isLoggedIn);
+  const navigate = useNavigate();
   return (
     <section className="w-full">
       <div className=" px-5 py-3 grid items-center   lg:grid-cols-2  bg-bg-primary">
-        <div className=" flex flex-col items-center text-center 
+        <div
+          className=" flex flex-col items-center text-center 
         
-          lg:items-start lg:text-left">
-          <h1 className="font2-heading my-6">
-            {heading}
-          </h1>
+          lg:items-start lg:text-left"
+        >
+          <h1 className="font2-heading my-6">{heading}</h1>
           <p className="text-text-secondary mb-8  lg:text-xl font1-epundu">
             {description}
           </p>
           <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start font1-epundu">
             {buttons.primary && (
-              <Button asChild className="w-full sm:w-auto border lavendar-btn ">
-                <a href={buttons.primary.url}>{buttons.primary.text}</a>
+              <Button
+                className="w-full sm:w-auto border cursor-pointer  lavendar-btn "
+                onClick={() => {
+                  if (isLoggedIn) {
+                    navigate("/chat");
+                  } else {
+                    navigate("/signup");
+                  }
+                }}
+              >
+                {/* <a href={isLoggedIn ? window.location.origin+"/chat" :  buttons.primary.url}> */}
+                {isLoggedIn ? "Open Chat" : buttons.primary.text}
+                {/* </a> */}
               </Button>
             )}
             {buttons.secondary && (
