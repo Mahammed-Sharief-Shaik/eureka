@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { isTokenExpired } from "./utils/auth.ts";
 import { toast } from "sonner";
 import useStoreData from "./store/store.ts";
-import { TooltipProvider } from "./components/ui/tooltip.tsx";
 
 const App = () => {
   const logoutUser = useStoreData((state) => state.logoutUser);
@@ -17,7 +16,6 @@ const App = () => {
   const setUserName = useStoreData((state) => state.setUserName);
   const setUserId = useStoreData((state) => state.setUserId);
   const setMail = useStoreData((state) => state.setMail);
-  const loggedIn = useStoreData((state) => state.isLoggedIn);
 
   useEffect(() => {
     const checkLogged = () => {

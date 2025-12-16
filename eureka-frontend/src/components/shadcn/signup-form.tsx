@@ -7,7 +7,6 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldSeparator,
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import SignupImage from "/signup-page-side.webp";
@@ -15,7 +14,6 @@ import {
   useEffect,
   useRef,
   useState,
-  type ChangeEvent,
   type FormEvent,
 } from "react";
 import { useSignup } from "@/hooks/useSignup";
