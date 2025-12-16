@@ -16,10 +16,11 @@ const App = () => {
   const setUserName = useStoreData((state) => state.setUserName);
   const setUserId = useStoreData((state) => state.setUserId);
   const setMail = useStoreData((state) => state.setMail);
+  const loggedInRecently = useStoreData(state => state.loggedInRecently);
 
   useEffect(() => {
     const checkLogged = () => {
-      if (isTokenExpired()) {
+      if (isTokenExpired() && !loggedInRecently ) {
         toast.warning("Session Expired!", {
           className: "font1-epundu tracking-wider",
         });

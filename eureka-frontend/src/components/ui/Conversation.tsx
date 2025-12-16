@@ -11,11 +11,9 @@ const Conversation = () => {
   return (
     <section
       className=" max-h-150  lg:max-h-110 px-5 pt-2 text-base 
-    selection:bg-accent  top-1/2 selection:text-bg-primary tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2"
+    selection:bg-accent    selection:text-bg-primary tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2"
     >
-{
-  // chatLoading && <Loader/>
-}
+      {chatLoading && <Loader message={"Loading chat!"} />}
 
       {currentChat?.content.map(({ role, content }, index) =>
         role === "USER" ? (

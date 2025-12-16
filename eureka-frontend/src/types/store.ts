@@ -21,4 +21,7 @@ export type Store = {
 
     chatLoading: boolean;
     setChatLoading: (val: boolean) => void;
+
+    loggedInRecently: boolean;
+    setLoggedInRecently: (val: boolean) => void;
 }

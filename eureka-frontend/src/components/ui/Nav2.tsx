@@ -31,15 +31,7 @@ const Nav2 = () => {
         <RiChatSmileAiFill className="text-2xl " />
         New Chat
       </button>
-      {
-        window.location.pathname==='/' &&
-        <button
-          className="white-btn cursor-pointer px-2 py-1 rounded-md"
-          onClick={logoutUser}
-        >
-          Logout
-        </button>
-      }
+     
     </section>
   );
 };
