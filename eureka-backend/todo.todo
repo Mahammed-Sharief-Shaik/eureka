@@ -4,7 +4,11 @@ frontend User sends the first message
 backend creates the name for chat based on 
 
 
-
+  // "scripts": {
+  //   "dev": "tsx watch src/server.ts",
+  //   "build": "tsc",
+  //   "start": "node dist/server.js"
+  // },
 
 
 
