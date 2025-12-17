@@ -21,7 +21,7 @@ function About() {
         <p className="text-text-secondary text-lg mb-12 leading-relaxed">
           Eureka is a passion project by{" "}
           <span className="text-[var(--color-primary)] font-semibold">
-            Matrix
+            Shaik Mahammed Sharief
           </span>
           , a developer who believes coding should sharpen your thinking—not
           your copy-paste skills. Inspired by learners who struggle with DSA

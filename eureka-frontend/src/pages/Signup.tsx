@@ -21,9 +21,9 @@ const Signup = () => {
     checkLogin();
   });
   return (
-    <div className="min-h-screen">
+    <div className="">
       {isLoggedIn && <Nav2 />}
-      <SignupForm className="bg-bg-primary text-white " />
+      <SignupForm className="bg-bg-primary text-white py-10 md:py-0" />
     </div>
   );
 };
