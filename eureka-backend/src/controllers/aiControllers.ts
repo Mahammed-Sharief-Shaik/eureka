@@ -50,22 +50,18 @@ const getFirstReply = async (firstMessage: string, conversationId: number) => {
     await addMessageToChat(reply, "ASSISTANT", conversationId);
     return reply;
 }
-
-const getReply = async (msg: string, conversationId: number, userId: number | undefined) => {
+const getReply = async (
+    msg: string,
+    conversationId: number,
+    userId: number | undefined
+) => {
     if (!userId) return;
-    const last5Messages: Message[] = await getLastChats(conversationId, userId);
-    // console.log(last5Messages);
-    const historyMessages: ChatMessage[] = last5Messages.map((m) => ({
-        role:
-            m.role === MessageRole.USER
-                ? "user"
-                : m.role === MessageRole.ASSISTANT
-                    ? "assistant"
-                    : "system",
-        content: m.content,
-    }));
 
-
+    // Already ChatMessage[]
+    const historyMessages: ChatMessage[] = await getLastChats(
+        conversationId,
+        userId
+    );
 
     const response = await groq.chat.completions.create({
         model: "llama-3.3-70b-versatile",
@@ -77,14 +73,18 @@ const getReply = async (msg: string, conversationId: number, userId: number | un
             ...historyMessages,
             {
                 role: "user",
-                content: msg
-            }
+                content: msg,
+            },
         ],
     });
+
     const reply = response.choices[0].message.content!;
-    await addMessageToChat(reply, "ASSISTANT", conversationId)
+
+    await addMessageToChat(reply, "ASSISTANT", conversationId);
+
     return reply;
-}
+};
+
 
 export const createChat = async (req: Request, res: Response) => {
     const reply = await getTitle(req.body.firstMessage);
