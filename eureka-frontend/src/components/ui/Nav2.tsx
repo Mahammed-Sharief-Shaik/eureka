@@ -6,7 +6,6 @@ import useStoreData from "@/store/store";
 const Nav2 = () => {
   const navigate = useNavigate();
   const setCurrentChat = useStoreData((state) => state.setCurrentChat);
-  const logoutUser = useStoreData((state) => state.logoutUser);
   return (
     <section
       className="flex justify-evenly items-center gap-3 py-1 w-full 

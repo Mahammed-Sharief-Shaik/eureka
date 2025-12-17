@@ -1,7 +1,7 @@
 import type { SignupFormData, SignupResponse } from "@/types";
-import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 
 export const useSignup = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -12,8 +12,8 @@ export const useSignup = () => {
         setError("");
 
         try {
-            const response = await axios.post<SignupResponse>(
-                "http://localhost:8000/api/auth/signup",
+            const response = await api.post<SignupResponse>(
+                "/api/auth/signup",
                 data
             );
             // localStorage.setItem("token", response.data.token);

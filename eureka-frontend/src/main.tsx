@@ -8,12 +8,12 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  // <StrictMode>
-  <BrowserRouter>
-    <Navbar1 />
+  <StrictMode>
+    <BrowserRouter>
+      <Navbar1 />
       <App />
-    <Footer />
-    <Toaster richColors position="top-right" />
-  </BrowserRouter>
-  // </StrictMode>
+      <Footer />
+      <Toaster richColors position="top-right" />
+    </BrowserRouter>
+  </StrictMode>
 );

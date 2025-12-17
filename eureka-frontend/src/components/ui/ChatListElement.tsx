@@ -10,7 +10,7 @@ const ChatListElement = ({
   id: number;
   setOpen: (val: boolean) => void;
 }) => {
-  const { getChat, loading } = useFetchChat();
+  const { getChat } = useFetchChat();
   const setCurrentChatIdName = useStoreData(
     (state) => state.setCurrentChatIdName
   );

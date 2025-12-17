@@ -13,7 +13,7 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
           p({ children }) {
             return <div>{children}</div>;
           },
-          code({ inline, className, children, ...props }) {
+          code({ className, children, ...props }) {
             // 1. Check if the class name indicates a language (e.g., "language-python")
             const match = /language-(\w+)/.exec(className || "");
 

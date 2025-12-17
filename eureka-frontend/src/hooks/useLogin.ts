@@ -1,7 +1,8 @@
 import { type LoginResponse, type LoginFormData } from "@/types";
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
+
 
 export const useLogin = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -13,8 +14,8 @@ export const useLogin = () => {
             setLoading(true);
             setError("");
 
-            const response = await axios.post<LoginResponse>(
-                "http://localhost:8000/api/auth/login",
+            const response = await api.post<LoginResponse>(
+                "/api/auth/login",
                 data
             );
             // console.log(response);

@@ -11,6 +11,6 @@ export const getChatConv = async (id: number) => {
                 createdAt: "asc"
             }
         });
-        await timeWaste(5);
+        // await timeWaste(5);
         return response;
 }

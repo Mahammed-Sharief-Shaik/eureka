@@ -1,23 +1,39 @@
-import { useState, ReactNode, isValidElement } from "react";
+import { useState, isValidElement } from "react";
+import type { ReactNode } from "react";
 import { FiClipboard, FiCheck } from "react-icons/fi";
 
 // Helper function to extract plain text from React children
+
 const extractText = (node: ReactNode): string => {
   if (typeof node === "string") return node;
-  if (Array.isArray(node)) return node.map(extractText).join("");
-  if (isValidElement(node) && node.props.children) {
-    return extractText(node.props.children);
+
+  if (Array.isArray(node)) {
+    return node.map(extractText).join("");
   }
+
+  if (isValidElement(node)) {
+    const children = (node.props as { children?: ReactNode }).children;
+    if (children) {
+      return extractText(children);
+    }
+  }
+
   return "";
 };
 
-const CodeBlock = ({ children, className }: { children: ReactNode; className?: string }) => {
+const CodeBlock = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   const [copied, setCopied] = useState(false);
 
   const copyCode = () => {
     // Extract the text instead of casting to String
-    const codeText = extractText(children).trim(); 
-    
+    const codeText = extractText(children).trim();
+
     navigator.clipboard.writeText(codeText);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);

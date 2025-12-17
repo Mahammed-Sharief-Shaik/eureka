@@ -1,7 +1,7 @@
 import useStoreData from "@/store/store";
-import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 
 export const useCreateChat = () => {
   const setCurrentChatIdName = useStoreData(state => state.setCurrentChatIdName);
@@ -17,8 +17,8 @@ export const useCreateChat = () => {
       content : message
     });
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/ai/generate",
+      const response = await api.post(
+        "/api/ai/generate",
         {
           message,
           conversationId: currentChat.chatId,
@@ -30,7 +30,7 @@ export const useCreateChat = () => {
         }
       );
 
-      console.log(response);
+      // console.log(response);
 
       addToCurrentChat({
         role: "ASSISTANT",
@@ -53,8 +53,8 @@ export const useCreateChat = () => {
       }
     );
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/ai/create-chat",
+      const response = await api.post(
+        "/api/ai/create-chat",
         {
           firstMessage: message
         },
@@ -65,7 +65,7 @@ export const useCreateChat = () => {
         }
       );
 
-      console.log(response);
+      // console.log(response);
       const { id, title } = response.data.conversation;
       setCurrentChatIdName(id, title);
       addToChatList({

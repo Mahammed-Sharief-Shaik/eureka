@@ -2,12 +2,12 @@ import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import { TbUserHexagon } from "react-icons/tb";
 import useStoreData from "@/store/store.ts";
 import { useEffect } from "react";
-import axios from "axios";
 import ChatListElement from "./ChatListElement";
 import { MdHistory } from "react-icons/md";
 import LogoDisp from "./LogoDisp";
 import { MdLogout } from "react-icons/md";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
+import { api } from "@/lib/api";
 
 const SideBar = ({
   open,
@@ -23,7 +23,7 @@ const SideBar = ({
 
   useEffect(() => {
     const fetchChats = async () => {
-      const response = await axios.get("http://localhost:8000/api/ai/chats", {
+      const response = await api.get("/api/ai/chats", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

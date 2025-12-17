@@ -10,12 +10,7 @@ import {
 } from "@/components/shadcn/field";
 import { Input } from "@/components/shadcn/input";
 import SignupImage from "/signup-page-side.webp";
-import {
-  useEffect,
-  useRef,
-  useState,
-  type FormEvent,
-} from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useSignup } from "@/hooks/useSignup";
 import Loader from "../ui/Loader";
 import { toast } from "sonner";
@@ -41,7 +36,7 @@ export function SignupForm({
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("use effect ",error);
+    // console.log("use effect ",error);
     if (error) {
       toast.error(error, {
         className: "font1-epundu tracking-wider",
@@ -49,7 +44,7 @@ export function SignupForm({
 
       setTimeout(() => {
         setError("");
-      },1000);
+      }, 1000);
     }
   }, [error]);
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
@@ -76,13 +71,17 @@ export function SignupForm({
     } else {
       try {
         const res = await signup({ name, email, password });
-        console.log("Signed in:", res);
-        toast.success("Account created successfully. Proceed to login.", {
-          className: "font1-epundu tracking-wider",
-        });
+        // console.log("Signed in:", res);
+        if (res)
+          toast.success("Account created successfully. Proceed to login.", {
+            className: "font1-epundu tracking-wider",
+          });
         navigate("/login");
       } catch {
         // error handled in hook
+        toast.error("Account creation Failed. Try Again", {
+          className: "font1-epundu tracking-wider",
+        });
       }
     }
     setLoading(false);
