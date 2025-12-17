@@ -6,7 +6,7 @@ const Login = () => {
   const isLoggedIn = useStoreData((state) => state.isLoggedIn);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {isLoggedIn && <Nav2 />}
 
       <LoginForm className="bg-bg-primary text-white min-h-screen" />
