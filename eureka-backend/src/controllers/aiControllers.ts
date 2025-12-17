@@ -6,6 +6,7 @@ import { addMessageToChat } from "../db/addMessageToChat.js";
 import { getLastChats } from "../db/getLastChats.js";
 import { getChats } from "../db/getChats.js";
 import { getChatConv } from "../db/getChatConv.js";
+import { Message, MessageRole } from "@prisma/client";
 
 
 type ChatMessage = {
@@ -52,12 +53,19 @@ const getFirstReply = async (firstMessage: string, conversationId: number) => {
 
 const getReply = async (msg: string, conversationId: number, userId: number | undefined) => {
     if (!userId) return;
-    const last5Messages = await getLastChats(conversationId, userId);
+    const last5Messages: Message[] = await getLastChats(conversationId, userId);
     // console.log(last5Messages);
     const historyMessages: ChatMessage[] = last5Messages.map((m) => ({
-        role: m.role === "USER" ? "user" : "assistant",
-        content: m.content, // or m.content depending on schema
+        role:
+            m.role === MessageRole.USER
+                ? "user"
+                : m.role === MessageRole.ASSISTANT
+                    ? "assistant"
+                    : "system",
+        content: m.content,
     }));
+
+
 
     const response = await groq.chat.completions.create({
         model: "llama-3.3-70b-versatile",
