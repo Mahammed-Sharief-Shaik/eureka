@@ -6,8 +6,6 @@ import { addMessageToChat } from "../db/addMessageToChat.js";
 import { getLastChats } from "../db/getLastChats.js";
 import { getChats } from "../db/getChats.js";
 import { getChatConv } from "../db/getChatConv.js";
-import { Message, MessageRole } from "@prisma/client";
-
 
 type ChatMessage = {
     role: "system" | "user" | "assistant";
