@@ -1,5 +1,5 @@
 import prisma from "../prisma.js";
-import { MessageRole } from "@prisma/client";
+import { MessageRole } from "../generated/prisma/enums.js";
 
 type ChatMessage = {
   role: "system" | "user" | "assistant";
