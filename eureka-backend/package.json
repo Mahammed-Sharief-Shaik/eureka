@@ -7,7 +7,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "build": "tsc && prisma generate",
+    "build": "tsc && npx prisma generate",
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts"
   },
