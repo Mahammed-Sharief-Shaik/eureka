@@ -6,10 +6,10 @@ const Login = () => {
   const isLoggedIn = useStoreData((state) => state.isLoggedIn);
 
   return (
-    <div className="min-h-screen">
+    <div className="flex flex-col justify-center items-center w-screen h-full">
       {isLoggedIn && <Nav2 />}
 
-      <LoginForm className="bg-bg-primary text-white min-h-screen" />
+      <LoginForm className="bg-bg-primary text-white min-h-screen pt-10 md:py-5" />
     </div>
   );
 };

@@ -21,9 +21,9 @@ const Signup = () => {
     checkLogin();
   });
   return (
-    <div className="">
+    <div className=" flex flex-col justify-center items-center">
       {isLoggedIn && <Nav2 />}
-      <SignupForm className="bg-bg-primary text-white py-10 md:py-0" />
+      <SignupForm className="bg-bg-primary text-white min-h-screen pt-10 md:pt-5" />
     </div>
   );
 };

@@ -83,7 +83,7 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6 py-5", className)} {...props}>
+    <div className={cn("flex flex-col gap-6 w-full", className)} {...props}>
       {loading && <Loader />}
       <Card className="overflow-hidden p-0 w-9/10 md:w-3/4 mx-auto ring-1 ring-white shadow-lg shadow-accent">
         <CardContent className="grid p-0 md:grid-cols-2">
