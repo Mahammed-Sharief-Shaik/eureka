@@ -10,7 +10,11 @@ backend creates the name for chat based on
   //   "start": "node dist/server.js"
   // },
 
-
+"scripts": {
+    "build": "tsc && npx prisma generate",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts"
+  },
 
 
 
