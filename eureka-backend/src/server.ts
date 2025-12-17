@@ -6,7 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import aiRoutes from "./routes/aiRoutes.js"
 const app = express();
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(cors());
 
