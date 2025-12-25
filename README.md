@@ -271,5 +271,3 @@ It demonstrates:
 * Thoughtful UX decisions
 * Educational product thinking
 
-```
-
