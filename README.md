@@ -271,11 +271,5 @@ It demonstrates:
 * Thoughtful UX decisions
 * Educational product thinking
 
----
-
-## 📄 License
-
-MIT License
-
 ```
 
