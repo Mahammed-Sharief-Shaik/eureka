@@ -59,7 +59,7 @@ const ChatInputBox = () => {
         ctive:scale-95 transition-transform duration-200"
         onClick={handleSubmit}
       >
-        {loading && <Loader />}
+        {/* {loading && <Loader />} */}
 
         <GrSend className="text-3xl text-white bg-primary" />
       </button>
