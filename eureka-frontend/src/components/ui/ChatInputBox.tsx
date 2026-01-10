@@ -4,6 +4,7 @@ import { GrSend } from "react-icons/gr";
 import { toast } from "sonner";
 import useStoreData from "@/store/store";
 import { useCreateChat } from "@/hooks/useCreateChat";
+//import Loader from "./Loader";
 
 const ChatInputBox = () => {
   const { chatId } = useStoreData((state) => state.currentChat);
