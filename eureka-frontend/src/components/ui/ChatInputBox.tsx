@@ -29,7 +29,7 @@ const ChatInputBox = () => {
   };
 
   return (
-    <section className="w-full  flex items-center  justify-center gap-5 py-1 mt-auto">
+    <section className="w-full  flex items-center  justify-center gap-5 py-1 ">
       <StarBorder color="white" speed="5s" thickness={2} className="w-3/4 ">
         <div className="flex items-center justify-center gap-2">
           <textarea

@@ -5,7 +5,7 @@ const Chat = ({ open }: { open: boolean }) => {
   return (
     <section
       className={`max-h-screen   bg-bg-primary text-text-primary 
-    text-lg flex flex-col ml-10  ${
+    text-lg flex flex-col justify-between ml-10  ${
       open ? "w-full  md:ml-[25%] md:w-3/4" : "md:ml-12 w-full"
     } transition-all duration-300`}
     >

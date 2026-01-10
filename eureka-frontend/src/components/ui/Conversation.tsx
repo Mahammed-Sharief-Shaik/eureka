@@ -18,7 +18,7 @@ const Conversation = () => {
   if (currentChat.title) document.title = currentChat.title;
   return (
     <section
-      className=" max-h-150  lg:max-h-110 px-5 pt-2 text-base 
+      className="my-1   px-5 pt-2 text-base 
     selection:bg-accent    selection:text-bg-primary tracking-wider text-justify overflow-y-scroll flex flex-col  gap-2"
     >
       {chatLoading && <Loader message={"Loading chat!"} />}
